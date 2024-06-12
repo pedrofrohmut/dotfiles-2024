@@ -1,0 +1,48 @@
+# Import color scheme for alacritty
+import = ["/home/pedro/.config/alacritty/colors.toml"]
+
+[font]
+size = 11.0
+
+[font.bold]
+family = "FiraMono Nerd Font"
+# family = "Fira Code"
+style = "Bold"
+
+[font.normal]
+family = "FiraMono Nerd Font"
+# family = "Fira Code"
+style = "Regular"
+
+[[keyboard.bindings]]
+action = "SpawnNewInstance"
+key = "Return"
+mods = "Control|Shift"
+
+[[keyboard.bindings]]
+action = "Paste"
+key = "Insert"
+mods = "Shift"
+
+[[keyboard.bindings]]
+action = "Copy"
+key = "Insert"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "ScrollHalfPageUp"
+key = "PageUp"
+
+[[keyboard.bindings]]
+action = "ScrollHalfPageDown"
+key = "PageDown"
+
+[shell]
+program = "/bin/zsh"
+
+[window]
+opacity = 0.9
+
+[window.padding]
+x = 8
+y = 8
