@@ -8,12 +8,6 @@ $status\
 $python\
 $character"""
 
-# $memory_usage\
-# $time\
-# $c\
-# $shell\
-# $cmake\
-
 [python]
 symbol = ""
 pyenv_version_name = true

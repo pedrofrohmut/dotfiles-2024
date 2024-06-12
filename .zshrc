@@ -71,6 +71,9 @@ alias opam-env='eval $(opam env)'
 # Setup Dotnet8 env based on file
 alias dotnet8-env="source $HOME/opt/dotnet-8.0.201/dotnet8.env"
 
+# Compile the qtile configuration for any errors
+alias compile-qtile="python -m py_compile ~/.config/qtile/config.py"
+
 # --- ENV ----------------------------------------------------------------------
 
 # My local bin (my symlinks)
