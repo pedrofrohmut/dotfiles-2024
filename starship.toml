@@ -1,0 +1,19 @@
+# Which is equivalent to
+format = """
+$username\
+$hostname\
+$directory\
+$git_branch\
+$status\
+$python\
+$character"""
+
+# $memory_usage\
+# $time\
+# $c\
+# $shell\
+# $cmake\
+
+[python]
+symbol = ""
+pyenv_version_name = true
