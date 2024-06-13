@@ -17,11 +17,12 @@ def minimize_all(qtile):
 
 keys = [
     # Move focus between windows
-    Key([mod], "h",     lazy.layout.left()),
-    Key([mod], "l",     lazy.layout.right()),
-    Key([mod], "j",     lazy.layout.down()),
-    Key([mod], "k",     lazy.layout.up()),
-    Key([mod], "space", lazy.layout.next()),
+    Key([mod], "h", lazy.layout.left()),
+    Key([mod], "l", lazy.layout.right()),
+    Key([mod], "j", lazy.layout.down()),
+    Key([mod], "k", lazy.layout.up()),
+    Key([mod], "space", lazy.group.next_window()),
+    Key([mod, "shift"], "space", lazy.group.prev_window()),
 
     # Change window position on the current group
     Key([mod, "shift"], "h", lazy.layout.swap_left()),
@@ -30,11 +31,12 @@ keys = [
     Key([mod, "shift"], "k", lazy.layout.shuffle_up()),
 
     # Resize window size
-    Key([mod, "control"], "h", lazy.layout.grow()),
-    Key([mod, "control"], "l", lazy.layout.shrink()),
-    Key([mod, "control"], "n", lazy.layout.normalize()),
-    Key([mod, "shift"], "n",   lazy.layout.reset()),
-    Key([mod], "o",            lazy.layout.maximize()),
+    Key([mod, "control"], "j", lazy.layout.grow()),
+    Key([mod, "control"], "k", lazy.layout.shrink()),
+    Key([mod, "control"], "h", lazy.layout.grow_main()),
+    Key([mod, "control"], "l", lazy.layout.shrink_main()),
+    Key([mod], "m", lazy.layout.maximize()),
+    Key([mod, "shift"], "m", lazy.layout.reset()),
 
     # Move floating windows
     Key([mod, "shift"], "Left",  lazy.window.move_floating(-10, 0)),
@@ -55,15 +57,12 @@ keys = [
     Key(["mod1"], "Tab", lazy.screen.toggle_group()),
 
     # Layout control
-    Key([mod], "i",              lazy.window.toggle_floating()),
-    Key([mod], "o",              lazy.window.bring_to_front()),
-    Key([mod], "u",              lazy.window.toggle_minimize()),
-    Key([mod,  "shift"], "u",    minimize_all()),
-    Key([mod], "b",              lazy.hide_show_bar()),
-    Key([mod], "m",              lazy.next_layout()),
-    Key([mod, "shift"], "space", lazy.layout.toggle_split()),
-    ### Key([mod, "shift"], "space", lazy.layout.flip()),
-    ### Key([mod], "f", lazy.window.toggle_fullscreen()),
+    Key([mod], "u", lazy.window.toggle_minimize()),
+    Key([mod], "i", lazy.window.toggle_floating()),
+    Key([mod], "o", lazy.window.bring_to_front()),
+    Key([mod], "b", lazy.hide_show_bar()),
+    Key([mod], "a", lazy.next_layout()),
+    Key([mod,  "shift"], "u", minimize_all()),
 
     # Qtile
     Key([mod], "Return",       lazy.spawn(terminal)),
@@ -86,32 +85,30 @@ keys = [
     Key([mod], "0",     lazy.spawn("bash {0}/dotfiles/scripts/new_change_sink.sh".format(HOMEDIR))),
 ]
 
-# Add key bindings to switch VTs in Wayland.
-# We can't check qtile.core.name in default config as it is loaded before qtile is started
-# We therefore defer the check until the key binding is run by using .when(func=...)
-for vt in range(1, 8):
-    keys.append(
-        Key(
-            ["control", "mod1"],
-            f"f{vt}",
-            lazy.core.change_vt(vt).when(func=lambda: qtile.core.name == "wayland"),
-            desc=f"Switch to VT{vt}",
-        )
-    )
+# Drag floating layouts.
+mouse = [
+    Drag([mod], "Button1", lazy.window.set_position_floating(), start=lazy.window.get_position()),
+    Drag([mod], "Button3", lazy.window.set_size_floating(), start=lazy.window.get_size()),
+    Click([mod], "Button2", lazy.window.bring_to_front()),
+]
 
+#############################################################################################
+# Groups ####################################################################################
+#############################################################################################
 
 groups = [Group(i) for i in "123456789"]
 
 for i in groups:
-    keys.extend( [
+    keys.extend([
         Key([mod], i.name, lazy.group[i.name].toscreen()),
-        Key([mod, "shift"], i.name, lazy.window.togroup(i.name, switch_group=True)),
+        Key([mod, "shift"], i.name, lazy.window.togroup(i.name, switch_group=False)),
     ])
 
+#############################################################################################
+# Layouts ###################################################################################
+#############################################################################################
+
 layouts = [
-    ### layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),
-    ### layout.Bsp(),
-    # layout.MonadTall(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=2, single_border_width=0),
     layout.MonadTall(
         border_focus="#3a3b4c", 
         border_normal="#1a1b2c",
@@ -120,45 +117,56 @@ layouts = [
         single_border_width=0
     ),
     layout.Max(),
-    # Try more layouts by unleashing below layouts.
-    # layout.Bsp(),
-    # layout.Stack(num_stacks=2),
-    # layout.Matrix(),
-    # layout.MonadTall(),
-    # layout.MonadWide(),
-    # layout.RatioTile(),
-    # layout.Tile(),
-    # layout.TreeTab(),
-    # layout.VerticalTile(),
-    # layout.Zoomy(),
 ]
 
-widget_defaults = dict(
-    font="sans",
-    fontsize=12,
-    padding=3,
-)
+#############################################################################################
+# ScratchPads ###############################################################################
+#############################################################################################
+
+groups.append(ScratchPad("scratchpad", [
+    DropDown("term", terminal, width=0.8, height=0.8, y=0.08, opacity=1),
+    DropDown("htop", (terminal + " -e htop"), width=0.8, height=0.8, y=0.08, opacity=1),
+]))
+
+keys.extend([
+    Key([mod], "t",   lazy.group["scratchpad"].dropdown_toggle("term")),
+    Key([mod], "F11", lazy.group["scratchpad"].dropdown_toggle("term")),
+    Key([mod], "F12", lazy.group["scratchpad"].dropdown_toggle("htop")),
+])
+
+#############################################################################################
+# Bar and Widgets ###########################################################################
+#############################################################################################
+
+widget_defaults = dict(font="FiraMono Nerd Font", fontsize=12, padding=3)
 extension_defaults = widget_defaults.copy()
 
 screens = [
     Screen(
         top=bar.Bar(
             [
-                widget.GroupBox(active="00ffff", inactive="bababa", fontsize=14,
-                        highlight_method="line", highlight_color="005757"),
+                widget.GroupBox(
+                    active="00ffff", inactive="bababa", fontsize=14,
+                    highlight_method="line", highlight_color="005757"
+                ),
                 widget.Prompt(),
-                widget.TaskList(fontsize=13, font="Fira Code",
-                        foreground="aaaabb", highlight_method="block", border="343434",
-                        margin_x=10, padding_x=2, spacing=4, parse_text=lambda x : x[:25]),
+                widget.TaskList(
+                    fontsize=13, font="FiraMono Nerd Font",
+                    foreground="aaaabb", highlight_method="block", border="343434",
+                    margin_x=10, padding_x=2, spacing=4, 
+                    # Takes a slice of the first 25 characters to make it short to fit
+                    parse_text=lambda x : x[:25]
+                ),
                 widget.Chord(
-                    chords_colors={
-                        "launch": ("#ff0000", "#ffffff"),
-                    },
+                    chords_colors={ "launch": ("#ff0000", "#ffffff") },
                     name_transform=lambda name: name.upper(),
                 ),
-                widget.Volume(fmt='Vol: {}', step=5, update_interval=0.4, mouse_callbacks={
-                    'Button1': lazy.spawn("bash {0}/dotfiles/scripts/new_change_sink.sh".format(HOMEDIR)) 
-                }),
+                widget.Volume(
+                    fmt='Vol: {}', step=5, update_interval=0.4, mouse_callbacks={
+                        'Button1': lazy.spawn(
+                            "bash {0}/dotfiles/scripts/new_change_sink.sh".format(HOMEDIR)) 
+                    }
+                ),
                 widget.Sep(padding=20),
                 widget.Clock(format="%d/%m/%Y [%a]", update_interval=60.0),
                 widget.Sep(padding=20),
@@ -167,22 +175,13 @@ screens = [
                 widget.Systray(),
             ],
             24,
-            # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
-            # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
         ),
-        # You can uncomment this variable if you see that on X11 floating resize/moving is laggy
-        # By default we handle these events delayed to already improve performance, however your system might still be struggling
-        # This variable is set to None (no cap) by default, but you can set it to 60 to indicate that you limit it to 60 events per second
-        # x11_drag_polling_rate = 60,
     ),
 ]
 
-# Drag floating layouts.
-mouse = [
-    Drag([mod], "Button1", lazy.window.set_position_floating(), start=lazy.window.get_position()),
-    Drag([mod], "Button3", lazy.window.set_size_floating(), start=lazy.window.get_size()),
-    Click([mod], "Button2", lazy.window.bring_to_front()),
-]
+#############################################################################################
+# Options ###################################################################################
+#############################################################################################
 
 dgroups_key_binder = None
 dgroups_app_rules = []  # type: list
@@ -227,12 +226,11 @@ wl_xcursor_size = 28
 # java that happens to be on java's whitelist.
 wmname = "LG3D"
 
-# @hook.subscribe.startup_once
-# def start_once():
-#     subprocess.call("bash {0}/dotfiles/qtile/autostart.sh".format(HOMEDIR))
+#############################################################################################
+# Hooks #####################################################################################
+#############################################################################################
 
 @hook.subscribe.startup_once
 def start_once():
-    home = os.path.expanduser('~')
-    subprocess.call([home + '/dotfiles/qtile/autostart.sh'])
+    subprocess.call([HOMEDIR + '/dotfiles/qtile/autostart.sh'])
 
