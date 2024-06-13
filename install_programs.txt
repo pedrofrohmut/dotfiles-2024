@@ -1,0 +1,2 @@
+## For thunar
+sudo pacman -S thunar thunar-volman tumbler gvfs
