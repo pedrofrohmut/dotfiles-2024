@@ -102,7 +102,7 @@ keys = [
     Key([mod, "shift"], "q",   lazy.window.kill()),
     Key([mod, "control"], "r", lazy.reload_config()),
     Key([mod, "control"], "q", lazy.shutdown()),
-    Key([mod, "shift"], "F3",  lazy.spawn("systemctl suspend")),
+    Key([mod, "shift"], "F3",  lazy.spawn("bash -c \"swaylock -i ~/media/wallpaper/lock.png -f && systemctl suspend\"")),
 
     # Programs
     Key([mod], "r",          lazy.spawn("rofi -show run -theme ~/dotfiles/rofi/my_dracula.rasi")),
