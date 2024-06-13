@@ -173,7 +173,7 @@ keys.extend([
 # Bar and Widgets ###########################################################################
 #############################################################################################
 
-widget_defaults = dict(font="FiraMono Nerd Font", fontsize=12, padding=3)
+widget_defaults = dict(font="FiraMono Nerd Font", fontsize=12, padding=3, background="1a1b2ccc")
 extension_defaults = widget_defaults.copy()
 
 screens = [
@@ -186,9 +186,9 @@ screens = [
                 ),
                 widget.Prompt(),
                 widget.TaskList(
-                    fontsize=13, font="FiraMono Nerd Font",
-                    foreground="aaaabb", highlight_method="block", border="343434",
-                    margin_x=10, padding_x=2, spacing=4, 
+                    fontsize=13, font="FiraMono Nerd Font", foreground="aaaabb", 
+                    highlight_method="border", border="888888cc", border_width=3,
+                    margin_x=20, padding_x=2, spacing=20, 
                     # Takes a slice of the first 25 characters to make it short to fit
                     parse_text=lambda x : x[:25]
                 ),
@@ -202,6 +202,10 @@ screens = [
                             "bash {0}/dotfiles/scripts/new_change_sink.sh".format(HOMEDIR)) 
                     }
                 ),
+                widget.Sep(padding=20),
+                widget.CPU(format="CPU: {load_percent}%", update_interval=3.0),
+                widget.Sep(padding=20),
+                widget.Memory(format="RAM: {MemPercent}%", update_interval=3.0),
                 widget.Sep(padding=20),
                 widget.Clock(format="%d/%m/%Y [%a]", update_interval=60.0),
                 widget.Sep(padding=20),
@@ -271,4 +275,3 @@ wmname = "LG3D"
 @hook.subscribe.startup_once
 def start_once():
     subprocess.call([HOMEDIR + '/dotfiles/qtile/autostart.sh'])
-    subprocess.Popen(['swaybg', '-i', '~/media/wallpaper/1316292.jpeg', '-m', 'fill'])

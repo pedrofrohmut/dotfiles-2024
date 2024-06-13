@@ -34,3 +34,5 @@ wlsunset -T 5700 -t 3500 -g 1.0 -S 06:00 -s 19:00 &  ### My pref/recommend temp
 
 # PolicyKit Authentication Agent (PolicyKit Authentication Agent)
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+
+swaybg -i ~/media/wallpaper/1316292.jpeg -m fill &
