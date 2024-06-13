@@ -10,10 +10,56 @@ terminal = "alacritty"
 HOMEDIR = os.path.expanduser("~/")
 
 @lazy.function
-def minimize_all(qtile):
+def my_minimize_all(qtile):
     for win in qtile.current_group.windows:
         if hasattr(win, "toggle_minimize"):
             win.toggle_minimize()
+
+@lazy.function
+def my_move_window(qtile, direction):
+    if qtile.current_window.floating:
+        match direction:
+            case "left":
+                qtile.current_window.move_floating(-20, 0)
+            case "down":
+                qtile.current_window.move_floating(0, 20)
+            case "up":
+                qtile.current_window.move_floating(0, -20)
+            case "right":
+                qtile.current_window.move_floating(20, 0)
+    else:
+        match direction:
+            case "left":
+                qtile.current_layout.swap_left()
+            case "down":
+                qtile.current_layout.shuffle_down()
+            case "up":
+                qtile.current_layout.shuffle_up()
+            case "right":
+                qtile.current_layout.swap_right()
+
+@lazy.function
+def my_resize_window(qtile, direction):
+    if qtile.current_window.floating:
+        match direction:
+            case "left":
+                qtile.current_window.resize_floating(-20, 0)
+            case "down":
+                qtile.current_window.resize_floating(0, 20)
+            case "up":
+                qtile.current_window.resize_floating(0, -20)
+            case "right":
+                qtile.current_window.resize_floating(20, 0)
+    else:
+        match direction:
+            case "left":
+                qtile.current_layout.shrink_main()
+            case "down":
+                qtile.current_layout.grow()
+            case "up":
+                qtile.current_layout.shrink()
+            case "right":
+                qtile.current_layout.grow_main()
 
 keys = [
     # Move focus between windows
@@ -24,31 +70,19 @@ keys = [
     Key([mod], "space", lazy.group.next_window()),
     Key([mod, "shift"], "space", lazy.group.prev_window()),
 
-    # Change window position on the current group
-    Key([mod, "shift"], "h", lazy.layout.swap_left()),
-    Key([mod, "shift"], "l", lazy.layout.swap_right()),
-    Key([mod, "shift"], "j", lazy.layout.shuffle_down()),
-    Key([mod, "shift"], "k", lazy.layout.shuffle_up()),
-
-    # Resize window size
-    Key([mod, "control"], "j", lazy.layout.grow()),
-    Key([mod, "control"], "k", lazy.layout.shrink()),
-    Key([mod, "control"], "h", lazy.layout.grow_main()),
-    Key([mod, "control"], "l", lazy.layout.shrink_main()),
+    # Move window
+    Key([mod, "shift"], "h", my_move_window("left")),
+    Key([mod, "shift"], "j", my_move_window("down")),
+    Key([mod, "shift"], "k", my_move_window("up")),
+    Key([mod, "shift"], "l", my_move_window("right")),
+    
+    # Resize window
+    Key([mod, "control"], "h", my_resize_window("left")),    
+    Key([mod, "control"], "j", my_resize_window("down")),
+    Key([mod, "control"], "k", my_resize_window("up")),    
+    Key([mod, "control"], "l", my_resize_window("right")),    
     Key([mod], "m", lazy.layout.maximize()),
     Key([mod, "shift"], "m", lazy.layout.reset()),
-
-    # Move floating windows
-    Key([mod, "shift"], "Left",  lazy.window.move_floating(-10, 0)),
-    Key([mod, "shift"], "Right", lazy.window.move_floating(10, 0)),
-    Key([mod, "shift"], "Up",    lazy.window.move_floating(0, -10)),
-    Key([mod, "shift"], "Down",  lazy.window.move_floating(0, 10)),
-
-    # Resize floating windows
-    Key([mod, "control"], "Left",  lazy.window.resize_floating(-10, 0)),
-    Key([mod, "control"], "Right", lazy.window.resize_floating(10, 0)),
-    Key([mod, "control"], "Up",    lazy.window.resize_floating(0, -10)),
-    Key([mod, "control"], "Down",  lazy.window.resize_floating(0, 10)),
 
     # Switch between groups
     Key([mod], "p",      lazy.screen.prev_group()),
@@ -62,7 +96,7 @@ keys = [
     Key([mod], "o", lazy.window.bring_to_front()),
     Key([mod], "b", lazy.hide_show_bar()),
     Key([mod], "a", lazy.next_layout()),
-    Key([mod,  "shift"], "u", minimize_all()),
+    Key([mod,  "shift"], "u", my_minimize_all()),
 
     # Qtile
     Key([mod], "Return",       lazy.spawn(terminal)),
