@@ -99,19 +99,20 @@ keys = [
     Key([mod,  "shift"], "u", my_minimize_all()),
 
     # Qtile
-    Key([mod], "Return",       lazy.spawn(terminal)),
     Key([mod, "shift"], "q",   lazy.window.kill()),
     Key([mod, "control"], "r", lazy.reload_config()),
     Key([mod, "control"], "q", lazy.shutdown()),
-    Key([mod], "r",            lazy.spawncmd()),
     Key([mod, "shift"], "F3",  lazy.spawn("systemctl suspend")),
 
     # Programs
+    Key([mod], "r",          lazy.spawn("rofi -show run -theme ~/dotfiles/rofi/my_dracula.rasi")),
+    Key([mod, "shift"], "r", lazy.spawncmd()),
+    Key([mod], "w",          lazy.spawn("firefox")),
+    Key([mod], "e",          lazy.spawn("thunar")),
+    Key([mod], "c",          lazy.spawn("galculator")),
+    Key([mod], "y",          lazy.spawn("rofi -show drun -show-icons -theme ~/dotfiles/rofi/my_dracula.rasi")),
     Key([mod], "Return", lazy.spawn(terminal)),
-    Key([mod], "w",      lazy.spawn("firefox")),
-    Key([mod], "e",      lazy.spawn("thunar")),
-    Key([mod], "c",      lazy.spawn("galculator")),
-    Key([mod], "y",      lazy.spawn("xfce4-appfinder")),
+    Key([mod, "shift"], "y", lazy.spawn("xfce4-appfinder")),
 
     # Sound
     Key([mod], "equal", lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ +5%")),
@@ -205,8 +206,9 @@ screens = [
                 widget.Clock(format="%d/%m/%Y [%a]", update_interval=60.0),
                 widget.Sep(padding=20),
                 widget.Clock(format="%R", update_interval=1.0, foreground="00ffff"),
-                widget.Sep(padding=20),
-                widget.Systray(),
+                widget.TextBox(), # Just for padding the clock
+                # widget.Sep(padding=20),
+                # widget.Systray(), ### Doesnt work on wayland
             ],
             24,
         ),
@@ -233,6 +235,8 @@ floating_layout = layout.Floating(
         Match(wm_class="ssh-askpass"),  # ssh-askpass
         Match(title="branchdialog"),  # gitk
         Match(title="pinentry"),  # GPG key password entry
+        Match(wm_class="galculator"),
+        Match(wm_class="xfce4-appfinder"),
     ]
 )
 auto_fullscreen = True
@@ -267,4 +271,4 @@ wmname = "LG3D"
 @hook.subscribe.startup_once
 def start_once():
     subprocess.call([HOMEDIR + '/dotfiles/qtile/autostart.sh'])
-
+    subprocess.Popen(['swaybg', '-i', '~/media/wallpaper/1316292.jpeg', '-m', 'fill'])
