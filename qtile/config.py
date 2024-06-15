@@ -65,22 +65,20 @@ keys = [
     # Move focus between windows
     Key([mod], "h", lazy.layout.left()),
     Key([mod], "l", lazy.layout.right()),
-    Key([mod], "j", lazy.layout.down()),
-    Key([mod], "k", lazy.layout.up()),
-    Key([mod], "space", lazy.group.next_window()),
-    Key([mod, "shift"], "space", lazy.group.prev_window()),
+    Key([mod], "j", lazy.group.next_window()),
+    Key([mod], "k", lazy.group.prev_window()),
 
     # Move window
     Key([mod, "shift"], "h", my_move_window("left")),
     Key([mod, "shift"], "j", my_move_window("down")),
     Key([mod, "shift"], "k", my_move_window("up")),
     Key([mod, "shift"], "l", my_move_window("right")),
-    
+
     # Resize window
-    Key([mod, "control"], "h", my_resize_window("left")),    
+    Key([mod, "control"], "h", my_resize_window("left")),
     Key([mod, "control"], "j", my_resize_window("down")),
-    Key([mod, "control"], "k", my_resize_window("up")),    
-    Key([mod, "control"], "l", my_resize_window("right")),    
+    Key([mod, "control"], "k", my_resize_window("up")),
+    Key([mod, "control"], "l", my_resize_window("right")),
     Key([mod], "m", lazy.layout.maximize()),
     Key([mod, "shift"], "m", lazy.layout.reset()),
 
@@ -145,11 +143,12 @@ for i in groups:
 
 layouts = [
     layout.MonadTall(
-        border_focus="#3a3b4c", 
+        border_focus="#3a3b4c",
         border_normal="#1a1b2c",
-        border_focus_stack=["#d75f5f", "#8f3d3d"], 
+        border_focus_stack=["#d75f5f", "#8f3d3d"],
         border_width=2,
-        single_border_width=0
+        single_border_width=0,
+        change_ratio=0.02,
     ),
     layout.Max(),
 ]
@@ -186,9 +185,9 @@ screens = [
                 ),
                 widget.Prompt(),
                 widget.TaskList(
-                    fontsize=13, font="FiraMono Nerd Font", foreground="aaaabb", 
+                    fontsize=13, font="FiraMono Nerd Font", foreground="aaaabb",
                     highlight_method="border", border="888888cc", border_width=3,
-                    margin_x=20, padding_x=2, spacing=20, 
+                    margin_x=20, padding_x=2, spacing=20,
                     # Takes a slice of the first 25 characters to make it short to fit
                     parse_text=lambda x : x[:25]
                 ),
@@ -199,7 +198,7 @@ screens = [
                 widget.Volume(
                     fmt='Vol: {}', step=5, update_interval=0.4, mouse_callbacks={
                         'Button1': lazy.spawn(
-                            "bash {0}/dotfiles/scripts/new_change_sink.sh".format(HOMEDIR)) 
+                            "bash {0}/dotfiles/scripts/new_change_sink.sh".format(HOMEDIR))
                     }
                 ),
                 widget.Sep(padding=20),
@@ -210,7 +209,7 @@ screens = [
                 widget.Clock(format="%d/%m/%Y [%a]", update_interval=60.0),
                 widget.Sep(padding=20),
                 widget.Clock(format="%R", update_interval=1.0, foreground="00ffff"),
-                widget.TextBox(), # Just for padding the clock
+                widget.TextBox(), # To add some space between the clock and the bar end
                 # widget.Sep(padding=20),
                 # widget.Systray(), ### Doesnt work on wayland
             ],

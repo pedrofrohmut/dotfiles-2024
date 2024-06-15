@@ -20,7 +20,7 @@
 # --- System Tray --------------------------------------------------------------
 
 # Japanese typing
-#fcitx5 &
+fcitx5 &
 
 # Network (Manage your network connections)
 nm-applet &
