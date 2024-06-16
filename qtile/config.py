@@ -186,8 +186,8 @@ screens = [
                 widget.Prompt(),
                 widget.TaskList(
                     fontsize=13, font="FiraMono Nerd Font", foreground="aaaabb",
-                    highlight_method="border", border="888888cc", border_width=3,
-                    margin_x=20, padding_x=2, spacing=20,
+                    highlight_method="border", border="666666", border_width=1,
+                    margin_x=20, padding_x=10, padding_y=2, spacing=20, icon_size=0,
                     # Takes a slice of the first 25 characters to make it short to fit
                     parse_text=lambda x : x[:25]
                 ),
@@ -207,11 +207,11 @@ screens = [
                 widget.Memory(format="RAM: {MemPercent}%", update_interval=3.0),
                 widget.Sep(padding=20),
                 widget.Clock(format="%d/%m/%Y [%a]", update_interval=60.0),
-                widget.Sep(padding=20),
-                widget.Clock(format="%R", update_interval=1.0, foreground="00ffff"),
-                widget.TextBox(), # To add some space between the clock and the bar end
                 # widget.Sep(padding=20),
-                # widget.Systray(), ### Doesnt work on wayland
+                widget.Clock(format="%R", update_interval=1.0, foreground="00ffff"),
+                # widget.TextBox(), # To add some space between the clock and the bar end
+                widget.Sep(padding=20),
+                widget.Systray(), ### Doesnt work on wayland
             ],
             24,
         ),

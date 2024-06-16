@@ -27,12 +27,28 @@ nm-applet &
 
 # --- Background Apps ----------------------------------------------------------
 
-# Change color temperature
-wlsunset -T 5700 -t 3500 -g 1.0 -S 06:00 -s 19:00 &  ### My pref/recommend temp
-#wlsunset -T 6500 -t 4500 -g 0.9 -S 06:00 -s 19:00 & ### My preference temp
-#wlsunset -l 23.52 -L 46.35 -T 5700 -t 3500 &        ### Temp Recommend
-
 # PolicyKit Authentication Agent (PolicyKit Authentication Agent)
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
-swaybg -i ~/media/wallpaper/1316292.jpeg -m fill &
+if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
+    # Change color temperature (default: T 6500 t 4500)
+    wlsunset -T 5700 -t 3500 -g 1.0 -S 06:00 -s 19:00 &
+
+    # Wallpaper setter
+    swaybg -i ~/media/wallpaper/1316292.jpeg -m fill &
+else
+    # Keyboard repeat dalay/rate
+    xset r rate 250 25 &
+
+    # Compositor for X11
+    picom --config ~/.config/picom/picom.conf &
+
+    # Change color temperature
+    redshift-gtk &
+
+    # Wallpaper setter
+    nitrogen --restore &
+
+    # Hide Mouse Cursor when idle for 2 seconds
+    unclutter --timeout 2 --ignore-scrolling &
+fi

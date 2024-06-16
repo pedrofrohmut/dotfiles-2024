@@ -60,7 +60,7 @@ tar-to() {
     fi
 }
 
-alias last-installed='cat /var/log/pacman.log | grep "ALPM] installed" | tail -n 10'
+alias last-installed='cat /var/log/pacman.log | grep "ALPM] installed" | tail -n 30'
 alias installed="cat /var/log/pacman.log | grep 'ALPM] installed'"
 
 alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
