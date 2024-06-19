@@ -30,6 +30,9 @@ nm-applet &
 # PolicyKit Authentication Agent (PolicyKit Authentication Agent)
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
+# Power Manager
+xfce4-power-manager &
+
 if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
     # Change color temperature (default: T 6500 t 4500)
     wlsunset -T 5700 -t 3500 -g 1.0 -S 06:00 -s 19:00 &

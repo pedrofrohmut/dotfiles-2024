@@ -9,6 +9,26 @@ mod = "mod4"
 terminal = "alacritty"
 HOMEDIR = os.path.expanduser("~/")
 
+suspend_cmd = """
+    bash -c \"
+        if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
+            swaylock -i ~/media/wallpaper/lock.png -f && systemctl suspend
+        else
+            i3lock -i ~/media/wallpaper/lock.png && systemctl suspend
+        fi
+    \"
+"""
+
+rofi_apps_cmd = "rofi -show drun -show-icons -theme ~/dotfiles/rofi/my_dracula.rasi"
+
+rofi_run_cmd = "rofi -show run -theme ~/dotfiles/rofi/my_dracula.rasi"
+
+vol_up_cmd = "pactl set-sink-volume @DEFAULT_SINK@ +5%"
+
+vol_down_cmd = "pactl set-sink-volume @DEFAULT_SINK@ -5%"
+
+change_sink_cmd = "bash {0}/dotfiles/scripts/new_change_sink.sh".format(HOMEDIR)
+
 @lazy.function
 def my_minimize_all(qtile):
     for win in qtile.current_group.windows:
@@ -100,22 +120,22 @@ keys = [
     Key([mod, "shift"], "q",   lazy.window.kill()),
     Key([mod, "control"], "r", lazy.reload_config()),
     Key([mod, "control"], "q", lazy.shutdown()),
-    Key([mod, "shift"], "F3",  lazy.spawn("bash -c \"swaylock -i ~/media/wallpaper/lock.png -f && systemctl suspend\"")),
+    Key([mod, "shift"], "F3",  lazy.spawn(suspend_cmd)),
 
     # Programs
-    Key([mod], "r",          lazy.spawn("rofi -show run -theme ~/dotfiles/rofi/my_dracula.rasi")),
+    Key([mod], "r",          lazy.spawn(rofi_run_cmd)),
     Key([mod, "shift"], "r", lazy.spawncmd()),
     Key([mod], "w",          lazy.spawn("firefox")),
     Key([mod], "e",          lazy.spawn("thunar")),
     Key([mod], "c",          lazy.spawn("galculator")),
-    Key([mod], "y",          lazy.spawn("rofi -show drun -show-icons -theme ~/dotfiles/rofi/my_dracula.rasi")),
+    Key([mod], "y",          lazy.spawn(rofi_apps_cmd)),
     Key([mod], "Return", lazy.spawn(terminal)),
     Key([mod, "shift"], "y", lazy.spawn("xfce4-appfinder")),
 
     # Sound
-    Key([mod], "equal", lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ +5%")),
-    Key([mod], "minus", lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ -5%")),
-    Key([mod], "0",     lazy.spawn("bash {0}/dotfiles/scripts/new_change_sink.sh".format(HOMEDIR))),
+    Key([mod], "equal", lazy.spawn(vol_up_cmd)),
+    Key([mod], "minus", lazy.spawn(vol_down_cmd)),
+    Key([mod], "0",     lazy.spawn(change_sink_cmd)),
 ]
 
 # Drag floating layouts.
@@ -212,10 +232,8 @@ screens = [
                     name_transform=lambda name: name.upper(),
                 ),
                 widget.Volume(
-                    fmt='Vol: {}', step=5, update_interval=0.4, mouse_callbacks={
-                        'Button1': lazy.spawn(
-                            "bash {0}/dotfiles/scripts/new_change_sink.sh".format(HOMEDIR))
-                    }
+                    fmt='Vol: {}', step=5, update_interval=0.4,
+                    mouse_callbacks={ 'Button1': lazy.spawn(change_sink_cmd) }
                 ),
                 widget.Sep(padding=20),
                 widget.CPU(format="CPU: {load_percent}%", update_interval=3.0),
