@@ -28,10 +28,14 @@ nm-applet &
 # --- Background Apps ----------------------------------------------------------
 
 # PolicyKit Authentication Agent (PolicyKit Authentication Agent)
-/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+#/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+lxsession &
 
 # Power Manager
 xfce4-power-manager &
+
+# Load my custom theme
+xrdb -merge ~/.Xresources &
 
 if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
     # Change color temperature (default: T 6500 t 4500)
