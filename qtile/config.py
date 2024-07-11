@@ -191,7 +191,7 @@ keys.extend([
 # Bar and Widgets ###########################################################################
 #############################################################################################
 
-widget_defaults = dict(font="FiraMono Nerd Font", fontsize=12, padding=3, background="1a1b2ccc")
+widget_defaults = dict(font="FiraMono Nerd Font", fontsize=11, padding=3, background="1a1b2ccc")
 extension_defaults = widget_defaults.copy()
 
 screens = [
@@ -199,7 +199,7 @@ screens = [
         top=bar.Bar(
             [
                 widget.GroupBox(
-                    active="00ffff", inactive="bababa", fontsize=14,
+                    active="00ffff", inactive="bababa", fontsize=11,
                     highlight_method="line", highlight_color="005757"
                 ),
                 widget.Prompt(),
@@ -228,7 +228,7 @@ screens = [
                 widget.Clock(format="%R", update_interval=1.0, foreground="00ffff"),
                 # widget.TextBox(), # To add some space between the clock and the bar end
                 widget.Sep(padding=20),
-                widget.Systray(), ### Doesnt work on wayland
+                widget.Systray(icon_size=14, padding=8), ### Doesnt work on wayland
             ],
             24,
         ),

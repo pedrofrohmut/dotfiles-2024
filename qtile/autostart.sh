@@ -25,6 +25,9 @@ fcitx5 &
 # Network (Manage your network connections)
 nm-applet &
 
+# Pulse audio tray
+#pasystray &
+
 # --- Background Apps ----------------------------------------------------------
 
 # PolicyKit Authentication Agent (PolicyKit Authentication Agent)
