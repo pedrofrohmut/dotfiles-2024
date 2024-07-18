@@ -27,7 +27,8 @@ vol_up_cmd = "pactl set-sink-volume @DEFAULT_SINK@ +5%"
 
 vol_down_cmd = "pactl set-sink-volume @DEFAULT_SINK@ -5%"
 
-change_sink_cmd = "bash {0}/dotfiles/scripts/new_change_sink.sh".format(HOMEDIR)
+# change_sink_cmd = "bash {0}/dotfiles/scripts/new_change_sink.sh".format(HOMEDIR)
+change_port_cmd = "bash {0}/dotfiles/scripts/change_audio_port.sh".format(HOMEDIR)
 
 @lazy.function
 def my_minimize_all(qtile):
@@ -135,7 +136,7 @@ keys = [
     # Sound
     Key([mod], "equal", lazy.spawn(vol_up_cmd)),
     Key([mod], "minus", lazy.spawn(vol_down_cmd)),
-    Key([mod], "0",     lazy.spawn(change_sink_cmd)),
+    Key([mod], "0",     lazy.spawn(change_port_cmd)),
 ]
 
 # Drag floating layouts.
@@ -216,7 +217,7 @@ screens = [
                 ),
                 widget.Volume(
                     fmt='Vol: {}', step=5, update_interval=0.4,
-                    mouse_callbacks={ 'Button1': lazy.spawn(change_sink_cmd) }
+                    mouse_callbacks={ 'Button1': lazy.spawn(change_port_cmd) }
                 ),
                 widget.Sep(padding=20),
                 widget.CPU(format="CPU: {load_percent}%", update_interval=3.0),
