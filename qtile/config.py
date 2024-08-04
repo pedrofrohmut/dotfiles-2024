@@ -121,7 +121,7 @@ keys = [
     Key([mod, "shift"], "q",   lazy.window.kill()),
     Key([mod, "control"], "r", lazy.reload_config()),
     Key([mod, "control"], "q", lazy.shutdown()),
-    Key([mod, "shift"], "F3",  lazy.spawn(suspend_cmd)),
+    Key([mod, "control"], "s",  lazy.spawn(suspend_cmd)),
 
     # Programs
     Key([mod], "r",          lazy.spawn(rofi_run_cmd)),
@@ -217,7 +217,7 @@ screens = [
                 ),
                 widget.Volume(
                     fmt='Vol: {}', step=5, update_interval=0.4,
-                    mouse_callbacks={ 'Button1': lazy.spawn(change_port_cmd) }
+                    # mouse_callbacks={ 'Button1': lazy.spawn(change_port_cmd) }
                 ),
                 widget.Sep(padding=20),
                 widget.CPU(format="CPU: {load_percent}%", update_interval=3.0),

@@ -25,7 +25,7 @@ fcitx5 &
 # Network (Manage your network connections)
 nm-applet &
 
-# Pulse audio tray
+# Pulse audio tray (Does not need to be called here)
 #pasystray &
 
 # --- Background Apps ----------------------------------------------------------
@@ -40,6 +40,9 @@ xfce4-power-manager &
 # Load my custom theme
 xrdb -merge ~/.Xresources &
 
+# Set xrandr
+xrandr --output HDMI-A-0 --mode 1920x1080 --rate 75 &
+
 if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
     # Change color temperature (default: T 6500 t 4500)
     wlsunset -T 5700 -t 3500 -g 1.0 -S 06:00 -s 19:00 &
@@ -48,7 +51,8 @@ if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
     swaybg -i ~/media/wallpaper/1316292.jpeg -m fill &
 else
     # Keyboard repeat dalay/rate
-    xset r rate 250 25 &
+    # xset r rate 250 25 &
+    # xset r rate 500 50 &
 
     # Compositor for X11
     picom --config ~/.config/picom/picom.conf &
