@@ -201,7 +201,8 @@ screens = [
             [
                 widget.GroupBox(
                     active="00ffff", inactive="bababa", fontsize=11,
-                    highlight_method="line", highlight_color="005757"
+                    highlight_method="line", highlight_color="005757",
+                    disable_drag=True
                 ),
                 widget.Prompt(),
                 widget.TaskList(
