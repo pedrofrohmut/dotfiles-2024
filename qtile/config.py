@@ -100,8 +100,7 @@ keys = [
     Key([mod, "control"], "j", my_resize_window("down")),
     Key([mod, "control"], "k", my_resize_window("up")),
     Key([mod, "control"], "l", my_resize_window("right")),
-    Key([mod], "m", lazy.layout.maximize()),
-    Key([mod, "shift"], "m", lazy.layout.reset()),
+    Key([mod], "m", lazy.layout.reset()),
 
     # Switch between groups
     Key([mod], "p",      lazy.screen.prev_group()),
