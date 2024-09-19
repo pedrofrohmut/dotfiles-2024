@@ -258,6 +258,7 @@ floating_layout = layout.Floating(
         Match(title="pinentry"),  # GPG key password entry
         Match(wm_class="galculator"),
         Match(wm_class="xfce4-appfinder"),
+        Match(wm_class="Blueman-manager"),
     ],
     border_focus="#3a3b4c",
     border_normal="#1a1b2c",
