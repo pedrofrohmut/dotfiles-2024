@@ -23,12 +23,15 @@ rofi_apps_cmd = "rofi -show drun -show-icons -theme ~/dotfiles/rofi/my_dracula.r
 
 rofi_run_cmd = "rofi -show run -theme ~/dotfiles/rofi/my_dracula.rasi"
 
+# rofi_power_cmd = "bash {0}/dotfiles/scripts/rofi-power.sh".format(HOMEDIR)
+rofi_power_cmd = "bash -c ~/dotfiles/scripts/rofi-power.sh"
+
 vol_up_cmd = "pactl set-sink-volume @DEFAULT_SINK@ +5%"
 
 vol_down_cmd = "pactl set-sink-volume @DEFAULT_SINK@ -5%"
 
 # change_sink_cmd = "bash {0}/dotfiles/scripts/new_change_sink.sh".format(HOMEDIR)
-change_port_cmd = "bash {0}/dotfiles/scripts/change_audio_port.sh".format(HOMEDIR)
+# change_port_cmd = "bash {0}/dotfiles/scripts/change_audio_port.sh".format(HOMEDIR)
 
 @lazy.function
 def my_minimize_all(qtile):
@@ -121,6 +124,7 @@ keys = [
     Key([mod, "control"], "r", lazy.reload_config()),
     Key([mod, "control"], "q", lazy.shutdown()),
     Key([mod, "control"], "s",  lazy.spawn(suspend_cmd)),
+    Key([mod, "control"], "x",  lazy.spawn(rofi_power_cmd)),
 
     # Programs
     Key([mod], "r",          lazy.spawn(rofi_run_cmd)),
@@ -135,7 +139,7 @@ keys = [
     # Sound
     Key([mod], "equal", lazy.spawn(vol_up_cmd)),
     Key([mod], "minus", lazy.spawn(vol_down_cmd)),
-    Key([mod], "0",     lazy.spawn(change_port_cmd)),
+    # Key([mod], "0",     lazy.spawn(change_port_cmd)),
 ]
 
 # Drag floating layouts.
