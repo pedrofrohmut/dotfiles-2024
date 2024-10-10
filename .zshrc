@@ -1,9 +1,9 @@
-
 # --- Aliases/Functions --------------------------------------------------------
 
 alias src-rc='source ~/.zshrc'
 
 alias vim='nvim'
+alias hx='helix'
 
 alias gits='git status'
 alias gitp='git push'
@@ -81,8 +81,12 @@ alias compile-qtile="python -m py_compile ~/.config/qtile/config.py"
 
 # --- ENV ----------------------------------------------------------------------
 
+# Java
+export JAVA_HOME=/usr/lib/jvm/java-17-openjdk
+
 # My local bin (my symlinks)
 export LOCAL_BIN=$HOME/.local/bin # For endeavourOS
+
 export PATH=$PATH:$LOCAL_BIN
 
 # --- Keybinds -----------------------------------------------------------------
@@ -137,3 +141,6 @@ eval "$(starship init zsh)"
 
 # Opam (OCaml package manager)
 #eval "$(opam env)"
+
+# Zoxide
+eval "$(zoxide init zsh)"

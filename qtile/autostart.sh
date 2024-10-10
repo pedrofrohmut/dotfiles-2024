@@ -55,7 +55,10 @@ else
     # xset r rate 500 50 &
 
     # Compositor for X11
-    picom --config ~/.config/picom/picom.conf &
+    picom --backend glx \
+          --blur-method dual_kawase --blur-strength 2 \
+          --config ~/.config/picom/picom.conf &
+
 
     # Change color temperature
     redshift-gtk &
