@@ -24,7 +24,7 @@ rofi_apps_cmd = "rofi -show drun -show-icons -theme ~/dotfiles/rofi/my_dracula.r
 rofi_run_cmd = "rofi -show run -theme ~/dotfiles/rofi/my_dracula.rasi"
 
 # rofi_power_cmd = "bash {0}/dotfiles/scripts/rofi-power.sh".format(HOMEDIR)
-# rofi_power_cmd = "bash -c ~/dotfiles/scripts/rofi-power.sh"
+rofi_power_cmd = "bash -c ~/dotfiles/scripts/rofi-power.sh"
 
 vol_up_cmd = "pactl set-sink-volume @DEFAULT_SINK@ +5%"
 
@@ -32,7 +32,9 @@ vol_down_cmd = "pactl set-sink-volume @DEFAULT_SINK@ -5%"
 
 # change_sink_cmd = "bash {0}/dotfiles/scripts/new_change_sink.sh".format(HOMEDIR)
 # change_port_cmd = "bash {0}/dotfiles/scripts/change_audio_port.sh".format(HOMEDIR)
-change_port_cmd = "bash -c \"~/dotfiles/scripts/change_audio_port.sh\""
+change_port_cmd = "bash -c ~/dotfiles/scripts/change_audio_port.sh"
+
+get_port_name_cmd = "bash -c ~/dotfiles/scripts/get_audio_port_name.sh"
 
 @lazy.function
 def my_minimize_all(qtile):
@@ -85,6 +87,25 @@ def my_resize_window(qtile, direction):
                 qtile.current_layout.shrink()
             case "right":
                 qtile.current_layout.grow_main()
+
+# Function to get the output of a shell command
+def get_command_output(cmd):
+    result = subprocess.run(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    return result.stdout.decode('utf-8').strip()
+
+# Call my bash scripts to change port input and to get the name of the current input
+def my_change_port():
+    qtile.cmd_spawn(change_port_cmd)
+    port_name = get_command_output(get_port_name_cmd)
+    vol_txt.update(port_name)
+
+# Get the port name to initialize the widget
+initial_port_name = get_command_output(get_port_name_cmd)
+
+# My custom Text widget to show current Audio Port and change it on click
+vol_txt = widget.TextBox(text=initial_port_name, name="vol_txt")
+vol_txt.mouse_callbacks = { "Button1": my_change_port }
+vol_txt.update_interval = 0.5
 
 keys = [
     # Move focus between windows
@@ -220,19 +241,16 @@ screens = [
                     chords_colors={ "launch": ("#ff0000", "#ffffff") },
                     name_transform=lambda name: name.upper(),
                 ),
-                widget.Volume(
-                    fmt='Vol: {}', step=5, update_interval=0.4,
-                    mouse_callbacks={ 'Button1': lazy.spawn(change_port_cmd) }
-                ),
+                vol_txt,
+                widget.Sep(padding=20),
+                widget.Volume(fmt='Vol: {}', step=5, update_interval=0.4),
                 widget.Sep(padding=20),
                 widget.CPU(format="CPU: {load_percent}%", update_interval=3.0),
                 widget.Sep(padding=20),
                 widget.Memory(format="RAM: {MemPercent}%", update_interval=3.0),
                 widget.Sep(padding=20),
                 widget.Clock(format="%d/%m/%Y [%a]", update_interval=60.0),
-                # widget.Sep(padding=20),
                 widget.Clock(format="%R", update_interval=1.0, foreground="00ffff"),
-                # widget.TextBox(), # To add some space between the clock and the bar end
                 widget.Sep(padding=20),
                 widget.Systray(icon_size=14, padding=8), ### Doesnt work on wayland
             ],
