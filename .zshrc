@@ -81,6 +81,9 @@ alias compile-qtile="python -m py_compile ~/.config/qtile/config.py"
 
 # --- ENV ----------------------------------------------------------------------
 
+export EDITOR=/usr/bin/nvim
+export SHELL=/usr/bin/zsh
+
 # Java
 export JAVA_HOME=/usr/lib/jvm/java-17-openjdk
 
@@ -143,4 +146,4 @@ eval "$(starship init zsh)"
 #eval "$(opam env)"
 
 # Zoxide
-eval "$(zoxide init zsh)"
+# eval "$(zoxide init zsh)"

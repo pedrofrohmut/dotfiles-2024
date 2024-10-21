@@ -1,0 +1,7 @@
+" Make it single panel
+only
+
+" Transparent background
+highlight Win ctermbg=default
+
+colorscheme onedark
