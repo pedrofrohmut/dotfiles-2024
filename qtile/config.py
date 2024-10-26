@@ -161,7 +161,7 @@ keys = [
     # Sound
     Key([mod], "equal", lazy.spawn(vol_up_cmd)),
     Key([mod], "minus", lazy.spawn(vol_down_cmd)),
-    Key([mod], "0",     lazy.spawn(change_port_cmd)),
+    # Key([mod], "0",     lazy.spawn(change_port_cmd)),
 ]
 
 # Drag floating layouts.
