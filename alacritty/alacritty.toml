@@ -1,5 +1,5 @@
 # Import color scheme for alacritty
-import = ["/home/pedro/.config/alacritty/colors.toml"]
+general.import = ["/home/pedro/.config/alacritty/colors.toml"]
 
 [font]
 size = 9.0
@@ -37,7 +37,7 @@ key = "PageUp"
 action = "ScrollHalfPageDown"
 key = "PageDown"
 
-[shell]
+[terminal.shell]
 program = "/bin/zsh"
 
 [window]
