@@ -113,6 +113,7 @@ keys = [
     Key([mod], "l", lazy.layout.right()),
     Key([mod], "j", lazy.group.next_window()),
     Key([mod], "k", lazy.group.prev_window()),
+    Key([mod], "space", lazy.layout.next()),
 
     # Move window
     Key([mod, "shift"], "h", my_move_window("left")),
@@ -153,7 +154,6 @@ keys = [
     Key([mod, "shift"], "r", lazy.spawncmd()),
     Key([mod], "w",          lazy.spawn("firefox")),
     Key([mod], "e",          lazy.spawn("thunar")),
-    Key([mod], "c",          lazy.spawn("galculator")),
     Key([mod], "y",          lazy.spawn(rofi_apps_cmd)),
     Key([mod], "Return", lazy.spawn(terminal)),
     Key([mod, "shift"], "y", lazy.spawn("xfce4-appfinder")),
@@ -161,6 +161,8 @@ keys = [
     # Sound
     Key([mod], "equal", lazy.spawn(vol_up_cmd)),
     Key([mod], "minus", lazy.spawn(vol_down_cmd)),
+
+    # TODO: make a different function for this context
     # Key([mod], "0",     lazy.spawn(change_port_cmd)),
 ]
 
@@ -204,13 +206,12 @@ layouts = [
 
 groups.append(ScratchPad("scratchpad", [
     DropDown("term", terminal, width=0.8, height=0.8, y=0.08, opacity=1),
-    DropDown("htop", (terminal + " -e htop"), width=0.8, height=0.8, y=0.08, opacity=1),
+    DropDown("calc", "galculator", width=0.2, height=0.4, y=0.3, x=0.3, opacity=1),
 ]))
 
 keys.extend([
-    Key([mod], "t",   lazy.group["scratchpad"].dropdown_toggle("term")),
-    Key([mod], "F11", lazy.group["scratchpad"].dropdown_toggle("term")),
-    Key([mod], "F12", lazy.group["scratchpad"].dropdown_toggle("htop")),
+    Key([mod], "t", lazy.group["scratchpad"].dropdown_toggle("term")),
+    Key([mod], "c", lazy.group["scratchpad"].dropdown_toggle("calc")),
 ])
 
 #############################################################################################
