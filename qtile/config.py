@@ -99,6 +99,13 @@ def my_change_port():
     port_name = get_command_output(get_port_name_cmd)
     vol_txt.update(port_name)
 
+# Call my bash scripts to change port input and to get the name of the current input
+# Version made to be used on the Keys (keybinds) context
+def my_change_port_keys(qtile):
+    qtile.cmd_spawn(change_port_cmd)
+    port_name = get_command_output(get_port_name_cmd)
+    vol_txt.update(port_name)
+
 # Get the port name to initialize the widget
 initial_port_name = get_command_output(get_port_name_cmd)
 
@@ -164,6 +171,7 @@ keys = [
 
     # TODO: make a different function for this context
     # Key([mod], "0",     lazy.spawn(change_port_cmd)),
+    Key([mod], "0",  lazy.function(my_change_port_keys)),
 ]
 
 # Drag floating layouts.
