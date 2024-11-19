@@ -68,7 +68,9 @@ alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 alias update-mirrors='sudo reflector --country "Brazil" --age 12 --protocol https \
     --sort rate --save /etc/pacman.d/mirrorlist && echo "Mirror list updated successfully!"'
 
-alias update-arch='update-mirrors && sudo pacman -Syu && echo "System updated successfully!"'
+alias update-arch='sudo pacman -Syu && echo "System updated successfully!"'
+
+alias update-system='update-mirrors && update-arch'
 
 # Setup Ocaml env
 alias opam-env='eval $(opam env)'
