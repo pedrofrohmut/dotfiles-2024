@@ -135,18 +135,6 @@ keys = [
     Key([mod, "control"], "l", my_resize_window("right")),
     Key([mod], "m", lazy.layout.reset()),
 
-    # Move floating windows
-    Key([mod], "Left",  lazy.window.move_floating(-10, 0)),
-    Key([mod], "Right", lazy.window.move_floating(10, 0)),
-    Key([mod], "Up",    lazy.window.move_floating(0, -10)),
-    Key([mod], "Down",  lazy.window.move_floating(0, 10)),
-
-    # Resize floating windows
-    Key([mod, "control"], "Left",  lazy.window.resize_floating(-10, 0)),
-    Key([mod, "control"], "Right", lazy.window.resize_floating(10, 0)),
-    Key([mod, "control"], "Up",    lazy.window.resize_floating(0, -10)),
-    Key([mod, "control"], "Down",  lazy.window.resize_floating(0, 10)),
-
     # Switch between groups
     Key([mod], "p",      lazy.screen.prev_group()),
     Key([mod], "n",      lazy.screen.next_group()),
