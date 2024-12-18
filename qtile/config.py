@@ -120,7 +120,7 @@ keys = [
     Key([mod], "l", lazy.layout.right()),
     Key([mod], "j", lazy.group.next_window()),
     Key([mod], "k", lazy.group.prev_window()),
-    Key([mod], "space", lazy.layout.next()),
+    Key([mod, "shift"], "n", lazy.layout.next()),
 
     # Move window
     Key([mod, "shift"], "h", my_move_window("left")),
@@ -146,7 +146,7 @@ keys = [
     Key([mod], "i", lazy.window.toggle_floating()),
     Key([mod], "o", lazy.window.bring_to_front()),
     Key([mod], "b", lazy.hide_show_bar()),
-    Key([mod], "a", lazy.next_layout()),
+    Key([mod], "space", lazy.next_layout()),
     Key([mod,  "shift"], "u", my_minimize_all()),
 
     # Qtile
