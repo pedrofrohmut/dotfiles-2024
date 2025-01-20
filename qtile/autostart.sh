@@ -51,9 +51,12 @@ if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
     swaybg -i ~/media/wallpaper/1316292.jpeg -m fill &
 else
     # Keyboard repeat dalay/rate
-    xset r rate 300 30 &
-    # xset r rate 250 25 &
-    # xset r rate 500 50 &
+    xset r rate 300 30
+
+    # Disable X11 screen blanking
+    xset s off      # Disable screen saver
+    xset -dpms      # Disable DPMS (Display Power Management Signaling)
+    xset s noblank  # Prevent blanking the screen
 
     # Mouse sensitivity
     xinput --set-prop 9 'libinput Accel Speed' -0.2 &
@@ -62,7 +65,6 @@ else
     picom --backend glx \
           --blur-method dual_kawase --blur-strength 2 \
           --config ~/.config/picom/picom.conf &
-
 
     # Change color temperature
     redshift-gtk &
