@@ -4,37 +4,24 @@ from libqtile.lazy import lazy
 
 import subprocess
 import os
+from types import SimpleNamespace
 
 mod = "mod4"
 terminal = "alacritty"
 HOMEDIR = os.path.expanduser("~/")
 
-suspend_cmd = """
-    bash -c \"
-        if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
-            swaylock -i ~/media/wallpaper/lock.png -f && systemctl suspend
-        else
-            i3lock -i ~/media/wallpaper/lock.png && systemctl suspend
-        fi
-    \"
-"""
-
-rofi_apps_cmd = "rofi -show drun -show-icons -theme ~/dotfiles/rofi/my_dracula.rasi"
-
-rofi_run_cmd = "rofi -show run -theme ~/dotfiles/rofi/my_dracula.rasi"
-
-# rofi_power_cmd = "bash {0}/dotfiles/scripts/rofi-power.sh".format(HOMEDIR)
-rofi_power_cmd = "bash -c ~/dotfiles/scripts/rofi-power.sh"
-
-vol_up_cmd = "pactl set-sink-volume @DEFAULT_SINK@ +5%"
-
-vol_down_cmd = "pactl set-sink-volume @DEFAULT_SINK@ -5%"
-
-# change_sink_cmd = "bash {0}/dotfiles/scripts/new_change_sink.sh".format(HOMEDIR)
-# change_port_cmd = "bash {0}/dotfiles/scripts/change_audio_port.sh".format(HOMEDIR)
-change_port_cmd = "bash -c ~/dotfiles/scripts/change_audio_port.sh"
-
-get_port_name_cmd = "bash -c ~/dotfiles/scripts/get_audio_port_name.sh"
+# My bash commands
+cmd = SimpleNamespace(
+    vol_up = "pactl set-sink-volume @DEFAULT_SINK@ +5%",
+    vol_down = "pactl set-sink-volume @DEFAULT_SINK@ -5%",
+    suspend = "bash -c 'i3lock -i ~/media/wallpaper/lock.png && systemctl suspend'",
+    sway_suspend = "bash -c 'swaylock -i ~/media/wallpaper/lock.png -f && systemctl suspend'",
+    rofi_apps = "rofi -show drun -show-icons -theme ~/dotfiles/rofi/my_dracula.rasi",
+    rofi_run = "rofi -show run -theme ~/dotfiles/rofi/my_dracula.rasi",
+    rofi_power = "bash -c ~/dotfiles/scripts/rofi-power.sh",
+    change_port = "bash -c ~/dotfiles/scripts/change_audio_port.sh",
+    get_port_name = "bash -c ~/dotfiles/scripts/get_audio_port_name.sh",
+)
 
 @lazy.function
 def my_minimize_all(qtile):
@@ -95,19 +82,19 @@ def get_command_output(cmd):
 
 # Call my bash scripts to change port input and to get the name of the current input
 def my_change_port():
-    qtile.cmd_spawn(change_port_cmd)
-    port_name = get_command_output(get_port_name_cmd)
+    qtile.cmd_spawn(cmd.change_port)
+    port_name = get_command_output(cmd.get_port_name)
     vol_txt.update(port_name)
 
 # Call my bash scripts to change port input and to get the name of the current input
 # Version made to be used on the Keys (keybinds) context
 def my_change_port_keys(qtile):
-    qtile.cmd_spawn(change_port_cmd)
-    port_name = get_command_output(get_port_name_cmd)
+    qtile.cmd_spawn(cmd.change_port)
+    port_name = get_command_output(cmd.get_port_name)
     vol_txt.update(port_name)
 
 # Get the port name to initialize the widget
-initial_port_name = get_command_output(get_port_name_cmd)
+initial_port_name = get_command_output(cmd.get_port_name)
 
 # My custom Text widget to show current Audio Port and change it on click
 vol_txt = widget.TextBox(text=initial_port_name, name="vol_txt")
@@ -153,24 +140,24 @@ keys = [
     Key([mod, "shift"], "q",   lazy.window.kill()),
     Key([mod, "control"], "r", lazy.reload_config()),
     Key([mod, "control"], "q", lazy.shutdown()),
-    Key([mod, "control"], "s",  lazy.spawn(suspend_cmd)),
-    Key([mod, "control"], "x",  lazy.spawn(rofi_power_cmd)),
+    Key([mod, "control"], "s",  lazy.spawn(cmd.suspend)),
+    Key([mod, "control"], "x",  lazy.spawn(cmd.rofi_power)),
 
     # Programs
-    Key([mod], "r",          lazy.spawn(rofi_run_cmd)),
+    Key([mod], "r",          lazy.spawn(cmd.rofi_run)),
     Key([mod, "shift"], "r", lazy.spawncmd()),
     Key([mod], "w",          lazy.spawn("firefox")),
     Key([mod], "e",          lazy.spawn("thunar")),
-    Key([mod], "y",          lazy.spawn(rofi_apps_cmd)),
+    Key([mod], "y",          lazy.spawn(cmd.rofi_apps)),
     Key([mod], "Return", lazy.spawn(terminal)),
     Key([mod, "shift"], "y", lazy.spawn("xfce4-appfinder")),
 
     # Sound
-    Key([mod], "equal", lazy.spawn(vol_up_cmd)),
-    Key([mod], "minus", lazy.spawn(vol_down_cmd)),
+    Key([mod], "equal", lazy.spawn(cmd.vol_up)),
+    Key([mod], "minus", lazy.spawn(cmd.vol_down)),
 
     # TODO: make a different function for this context
-    # Key([mod], "0",     lazy.spawn(change_port_cmd)),
+    # Key([mod], "0",     lazy.spawn(cmd.change_port)),
     Key([mod], "0",  lazy.function(my_change_port_keys)),
 ]
 
