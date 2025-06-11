@@ -14,7 +14,11 @@ HOMEDIR = os.path.expanduser("~/")
 cmd = SimpleNamespace(
     vol_up = "pactl set-sink-volume @DEFAULT_SINK@ +5%",
     vol_down = "pactl set-sink-volume @DEFAULT_SINK@ -5%",
-    suspend = "bash -c 'i3lock -i ~/media/wallpaper/lock.png && systemctl suspend'",
+    suspend =
+        """bash -c 'i3lock -i ~/media/wallpaper/lock.png &&
+           bluetoothctl power off &&
+           systemctl suspend &&
+           bluetoothctl power on'""",
     sway_suspend = "bash -c 'swaylock -i ~/media/wallpaper/lock.png -f && systemctl suspend'",
     rofi_apps = "rofi -show drun -show-icons -theme ~/dotfiles/rofi/my_dracula.rasi",
     rofi_run = "rofi -show run -theme ~/dotfiles/rofi/my_dracula.rasi",
