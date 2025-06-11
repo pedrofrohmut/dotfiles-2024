@@ -62,9 +62,10 @@ else
     xinput --set-prop 9 'libinput Accel Speed' -0.2 &
 
     # Compositor for X11
-    picom --backend glx \
-          --blur-method dual_kawase --blur-strength 2 \
-          --config ~/.config/picom/picom.conf &
+    # picom --backend glx \
+    #       --blur-method dual_kawase --blur-strength 2 \
+    #       --config ~/.config/picom/picom.conf &
+    picom &
 
     # Change color temperature
     redshift-gtk &

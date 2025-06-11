@@ -132,6 +132,7 @@ keys = [
     Key([mod], "u", lazy.window.toggle_minimize()),
     Key([mod], "i", lazy.window.toggle_floating()),
     Key([mod], "o", lazy.window.bring_to_front()),
+    Key([mod], "f", lazy.window.toggle_fullscreen()),
     Key([mod], "b", lazy.hide_show_bar()),
     Key([mod], "space", lazy.next_layout()),
     Key([mod,  "shift"], "u", my_minimize_all()),
