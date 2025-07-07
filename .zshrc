@@ -83,16 +83,24 @@ alias compile-qtile="python -m py_compile ~/.config/qtile/config.py"
 
 # --- ENV ----------------------------------------------------------------------
 
-export EDITOR=/usr/bin/nvim
-export SHELL=/usr/bin/zsh
-
-# Java
-export JAVA_HOME=/usr/lib/jvm/java-17-openjdk
-
-# My local bin (my symlinks)
-export LOCAL_BIN=$HOME/.local/bin # For endeavourOS
-
-export PATH=$PATH:$LOCAL_BIN
+# # Fcitx5
+# export GTK_IM_MODULE=fcitx5
+# export QT_IM_MODULE=fcitx5
+# export XMODIFIERS="@im=fcitx5"
+# export DefaultIMModule=fcitx5
+# export SDL_IM_MODULE=fcitx5
+#
+# export EDITOR=/usr/bin/nvim
+# export SHELL=/usr/bin/zsh
+# export GIT_EDITOR=/usr/bin/nvim
+#
+# # Java
+# export JAVA_HOME=/usr/lib/jvm/java-17-openjdk
+#
+# # My local bin (my symlinks)
+# export LOCAL_BIN=$HOME/.local/bin # For endeavourOS
+#
+# export PATH=$PATH:$LOCAL_BIN
 
 # --- Keybinds -----------------------------------------------------------------
 
