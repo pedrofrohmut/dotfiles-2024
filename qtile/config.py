@@ -25,6 +25,7 @@ cmd = SimpleNamespace(
     rofi_power = "bash -c ~/dotfiles/scripts/rofi-power.sh",
     change_port = "bash -c ~/dotfiles/scripts/change_audio_port.sh",
     get_port_name = "bash -c ~/dotfiles/scripts/get_audio_port_name.sh",
+    firefox = "bash -c 'command -v firefox >/dev/null 2>&1 && firefox || flatpak run org.mozilla.firefox'",
 )
 
 @lazy.function
@@ -151,7 +152,7 @@ keys = [
     # Programs
     Key([mod], "r",          lazy.spawn(cmd.rofi_run)),
     Key([mod, "shift"], "r", lazy.spawncmd()),
-    Key([mod], "w",          lazy.spawn("firefox")),
+    Key([mod], "w",          lazy.spawn(cmd.firefox)),
     Key([mod], "e",          lazy.spawn("thunar")),
     Key([mod], "y",          lazy.spawn(cmd.rofi_apps)),
     Key([mod], "Return", lazy.spawn(terminal)),

@@ -49,7 +49,7 @@ alias du-here='du -h -d 1 | sort -hr | head --lines 20'
 alias dh='du-here'
 
 # Tar easy of use
-tar-to() {
+tar_to() {
     if [ ! $1 ]; then
         echo "Missing file input"
         echo "Usage: tar-to <input-path> <output-path>"
@@ -80,6 +80,16 @@ alias dotnet8-env="source $HOME/opt/dotnet-8.0.201/dotnet8.env"
 
 # Compile the qtile configuration for any errors
 alias compile-qtile="python -m py_compile ~/.config/qtile/config.py"
+
+# Run or flatpak
+run_or_flatpak() {
+    cmd_path=$(command -v $1)
+    if [ $cmd_path ]; then
+        $1
+    else
+        $2
+    fi
+}
 
 # --- ENV ----------------------------------------------------------------------
 
