@@ -14,12 +14,9 @@ HOMEDIR = os.path.expanduser("~/")
 cmd = SimpleNamespace(
     vol_up = "pactl set-sink-volume @DEFAULT_SINK@ +5%",
     vol_down = "pactl set-sink-volume @DEFAULT_SINK@ -5%",
-    suspend =
-        """bash -c 'i3lock -i ~/media/wallpaper/lock.png &&
-           bluetoothctl power off &&
-           systemctl suspend &&
-           bluetoothctl power on'""",
-    sway_suspend = "bash -c 'swaylock -i ~/media/wallpaper/lock.png -f && systemctl suspend'",
+    # suspend = "bash -c 'i3lock -i ~/media/wallpaper/lock.png && systemctl suspend'",
+    suspend = "bash -c 'slock & systemctl suspend'",
+    # sway_suspend = "bash -c 'swaylock -i ~/media/wallpaper/lock.png -f && systemctl suspend'",
     rofi_apps = "rofi -show drun -show-icons -theme ~/dotfiles/rofi/my_dracula.rasi",
     rofi_run = "rofi -show run -theme ~/dotfiles/rofi/my_dracula.rasi",
     rofi_power = "bash -c ~/dotfiles/scripts/rofi-power.sh",
@@ -105,6 +102,10 @@ initial_port_name = get_command_output(cmd.get_port_name)
 vol_txt = widget.TextBox(text=initial_port_name, name="vol_txt")
 vol_txt.mouse_callbacks = { "Button1": my_change_port }
 vol_txt.update_interval = 0.5
+
+@lazy.function
+def my_next_layout(qtile):
+    qtile.next_layout()
 
 keys = [
     # Move focus between windows
@@ -197,6 +198,7 @@ layouts = [
         border_width=2,
         single_border_width=0,
         change_ratio=0.02,
+        margin=0,
     ),
     layout.Max(),
 ]
@@ -239,11 +241,11 @@ screens = [
                     # Takes a slice of the first 25 characters to make it short to fit
                     parse_text=lambda x : x[:25]
                 ),
-                widget.Chord(
-                    chords_colors={ "launch": ("#ff0000", "#ffffff") },
-                    name_transform=lambda name: name.upper(),
+                widget.CurrentLayout(
+                    font="FiraMono Nerd Font", fontsize=12, padding=8, mouse_callbacks = { "Button1": my_next_layout }
                 ),
-                vol_txt,
+                widget.Sep(padding=20),
+                vol_txt, # My custom widget to change default sink
                 widget.Sep(padding=20),
                 widget.Volume(fmt='Vol: {}', step=5, update_interval=0.4),
                 widget.Sep(padding=20),

@@ -3,6 +3,7 @@
 export EDITOR=/usr/bin/nvim
 export SHELL=/usr/bin/zsh
 export GIT_EDITOR=/usr/bin/nvim
+export XCURSOR_SIZE=36
 
 # Use RADV (Mesa) instead of AMDVLK
 export AMD_VULKAN_ICD=RADV

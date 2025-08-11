@@ -48,7 +48,8 @@ case $option in
         fi
         ;;
     $SUSPEND )
-        i3lock -i ~/media/wallpaper/lock.png && systemctl suspend
+        # i3lock -i ~/media/wallpaper/lock.png && systemctl suspend
+        slock & systemctl suspend
         ;;
     * )
         exit
