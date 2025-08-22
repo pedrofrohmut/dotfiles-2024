@@ -7,16 +7,14 @@ import os
 from types import SimpleNamespace
 
 mod = "mod4"
-terminal = "alacritty"
+terminal = "st"
+calculator = "galculator"
 HOMEDIR = os.path.expanduser("~/")
 
 # My bash commands
 cmd = SimpleNamespace(
     vol_up = "pactl set-sink-volume @DEFAULT_SINK@ +5%",
     vol_down = "pactl set-sink-volume @DEFAULT_SINK@ -5%",
-    # suspend = "bash -c 'i3lock -i ~/media/wallpaper/lock.png && systemctl suspend'",
-    suspend = "bash -c 'slock & systemctl suspend'",
-    # sway_suspend = "bash -c 'swaylock -i ~/media/wallpaper/lock.png -f && systemctl suspend'",
     rofi_apps = "rofi -show drun -show-icons -theme ~/dotfiles/rofi/my_dracula.rasi",
     rofi_run = "rofi -show run -theme ~/dotfiles/rofi/my_dracula.rasi",
     rofi_power = "bash -c ~/dotfiles/scripts/rofi-power.sh",
@@ -146,8 +144,7 @@ keys = [
     # Qtile
     Key([mod, "shift"], "q",   lazy.window.kill()),
     Key([mod, "control"], "r", lazy.reload_config()),
-    Key([mod, "control"], "q", lazy.shutdown()),
-    Key([mod, "control"], "s",  lazy.spawn(cmd.suspend)),
+    # Key([mod, "control"], "q", lazy.shutdown()),
     Key([mod, "control"], "x",  lazy.spawn(cmd.rofi_power)),
 
     # Programs
@@ -209,7 +206,7 @@ layouts = [
 
 groups.append(ScratchPad("scratchpad", [
     DropDown("term", terminal, width=0.8, height=0.8, y=0.08, opacity=1),
-    DropDown("calc", "galculator", width=0.2, height=0.4, y=0.3, x=0.3, opacity=1),
+    DropDown("calc", calculator, width=0.2, height=0.4, y=0.3, x=0.3, opacity=1),
 ]))
 
 keys.extend([
