@@ -93,17 +93,23 @@ alias compile-qtile="python -m py_compile ~/.config/qtile/config.py"
 
 # Run or flatpak
 run_or_flatpak() {
-    cmd_path=$(command -v $1)
-    if [ $cmd_path ]; then
-        $1
+    cmd_path=$(command -v "$1")
+    if [ "$cmd_path" ]; then
+        "$1"
     else
-        $2
+        "$2"
     fi
 }
 
 # Easy to read help
 helpy() {
-    $1 --help | nvim -R # Pipe to Read Only neovim
+    cmd_path=$(command -v "$1")
+    if [ "$cmd_path" ]; then
+        "$1" --help | nvim -R # Pipe to Read Only neovim
+    else
+        echo "ERROR: Command '$1' not found"
+        return 1
+    fi
 }
 
 # --- ENV ----------------------------------------------------------------------
