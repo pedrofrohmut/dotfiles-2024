@@ -1,3 +1,13 @@
+# --- Dependencies -------------------------------------------------------------
+
+# xclip - System clipboard for X
+# git - git tool
+# nvim - my main editor
+# bat - more modern 'less' replacement
+# starship - for the shell prompt
+# tree - to check with tree view on terminal
+# Arch Linux - lots of stuff for pacman and others
+
 # --- Aliases/Functions --------------------------------------------------------
 
 alias src-rc='source ~/.zshrc'
@@ -73,10 +83,10 @@ alias update-arch='sudo pacman -Syu && echo "System updated successfully!"'
 alias update-system='update-mirrors && update-arch'
 
 # Setup Ocaml env
-alias opam-env='eval $(opam env)'
+# alias opam-env='eval $(opam env)'
 
 # Setup Dotnet8 env based on file
-alias dotnet8-env="source $HOME/opt/dotnet-8.0.201/dotnet8.env"
+# alias dotnet8-env="source $HOME/opt/dotnet-8.0.201/dotnet8.env"
 
 # Compile the qtile configuration for any errors
 alias compile-qtile="python -m py_compile ~/.config/qtile/config.py"
@@ -89,6 +99,11 @@ run_or_flatpak() {
     else
         $2
     fi
+}
+
+# Easy to read help
+helpy() {
+    $1 --help | nvim -R # Pipe to Read Only neovim
 }
 
 # --- ENV ----------------------------------------------------------------------
@@ -161,9 +176,3 @@ setopt nobeep
 
 # Starship Prompt
 eval "$(starship init zsh)"
-
-# Opam (OCaml package manager)
-#eval "$(opam env)"
-
-# Zoxide
-# eval "$(zoxide init zsh)"
