@@ -5,6 +5,9 @@ local M = {}
 
 local keys = {
     { key = "Enter", mods = "ALT", action = act.ToggleFullScreen },
+    { key = "Enter", mods = "CTRL|SHIFT", action = act.SpawnWindow },
+
+    -- Modes
     { key = "f", mods = "SHIFT|CTRL", action = act.Search("CurrentSelectionOrEmptyString") },
     { key = "x", mods = "SHIFT|CTRL", action = act.ActivateCopyMode },
 

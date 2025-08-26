@@ -7,7 +7,7 @@ import os
 from types import SimpleNamespace
 
 mod = "mod4"
-terminal = "wezterm"
+terminal = "alacritty"
 calculator = "galculator"
 HOMEDIR = os.path.expanduser("~/")
 
