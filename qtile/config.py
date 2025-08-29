@@ -161,8 +161,8 @@ keys = [
     Key([mod], "minus", lazy.spawn(cmd.vol_down)),
 
     # TODO: make a different function for this context
-    # Key([mod], "0",     lazy.spawn(cmd.change_port)),
-    Key([mod], "0",  lazy.function(my_change_port_keys)),
+    # Key([mod, "control"], "0",     lazy.spawn(cmd.change_port)),
+    Key([mod, "control"], "0",  lazy.function(my_change_port_keys)),
 ]
 
 # Drag floating layouts.
@@ -238,22 +238,22 @@ screens = [
                     # Takes a slice of the first 25 characters to make it short to fit
                     parse_text=lambda x : x[:25]
                 ),
-                widget.CurrentLayout(
-                    font="FiraMono Nerd Font", fontsize=12, padding=8, mouse_callbacks = { "Button1": my_next_layout }
-                ),
-                widget.Sep(padding=20),
-                vol_txt, # My custom widget to change default sink
-                widget.Sep(padding=20),
+                # widget.CurrentLayout(
+                #     font="FiraMono Nerd Font", fontsize=12, padding=8, mouse_callbacks = { "Button1": my_next_layout }
+                # ),
+                # widget.Sep(padding=20),
+                # vol_txt, # My custom widget to change default sink
+                # widget.Sep(padding=20),
                 widget.Volume(fmt='Vol: {}', step=5, update_interval=0.4),
                 widget.Sep(padding=20),
-                widget.CPU(format="CPU: {load_percent}%", update_interval=3.0),
+                # widget.CPU(format="CPU: {load_percent}%", update_interval=3.0),
+                # widget.Sep(padding=20),
+                # widget.Memory(format="RAM: {MemPercent}%", update_interval=3.0),
+                # widget.Sep(padding=20),
+                widget.Clock(format="%a %d/%m/%Y", update_interval=60.0),
+                widget.Clock(format="%R", update_interval=1.0, foreground="00ffff", fontsize=12),
                 widget.Sep(padding=20),
-                widget.Memory(format="RAM: {MemPercent}%", update_interval=3.0),
-                widget.Sep(padding=20),
-                widget.Clock(format="%d/%m/%Y [%a]", update_interval=60.0),
-                widget.Clock(format="%R", update_interval=1.0, foreground="00ffff"),
-                widget.Sep(padding=20),
-                widget.Systray(icon_size=14, padding=8), ### Doesnt work on wayland
+                widget.Systray(icon_size=14, padding=8, update_interval=1.0), ### Doesnt work on wayland
             ],
             24,
         ),

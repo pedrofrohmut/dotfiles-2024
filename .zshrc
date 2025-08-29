@@ -89,7 +89,8 @@ alias update-system='update-mirrors && update-arch'
 # alias dotnet8-env="source $HOME/opt/dotnet-8.0.201/dotnet8.env"
 
 # Compile the qtile configuration for any errors
-alias compile-qtile="python -m py_compile ~/.config/qtile/config.py"
+alias qtile-compile="python -m py_compile ~/.config/qtile/config.py"
+alias qtile-shutdown="qtile cmd-obj --function shutdown"
 
 # Run or flatpak
 run_or_flatpak() {
