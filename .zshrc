@@ -13,6 +13,7 @@
 alias src-rc='source ~/.zshrc'
 
 alias vim='nvim'
+alias ovim='/usr/bin/env vim'
 alias hx='helix'
 
 alias gits='git status'
@@ -131,7 +132,10 @@ helpy() {
 #
 # # My local bin (my symlinks)
 # export LOCAL_BIN=$HOME/.local/bin # For endeavourOS
-#
+
+# Golang
+export GOPATH=$HOME/.go
+
 # export PATH=$PATH:$LOCAL_BIN
 
 # --- Keybinds -----------------------------------------------------------------

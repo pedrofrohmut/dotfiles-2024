@@ -7,3 +7,5 @@
 # export SHELL=/usr/bin/zsh
 # export EDITOR=/usr/bin/nvim
 # export GIT_EDITOR=/usr/bin/nvim
+
+export GOPATH=$HOME/.go
