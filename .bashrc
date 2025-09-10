@@ -9,3 +9,6 @@
 # export GIT_EDITOR=/usr/bin/nvim
 
 export GOPATH=$HOME/.go
+
+alias ls='ls --color=auto'
+alias ll='ls -lAFh'

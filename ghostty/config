@@ -1,0 +1,25 @@
+maximize = true
+
+# Window
+window-decoration = none
+window-padding-x = 8
+window-padding-y = 8
+
+# Cursor
+cursor-style = block
+cursor-style-blink = false
+shell-integration-features = no-cursor
+
+# Font
+font-family = FiraMono Nerd Font
+font-size = 10
+
+# Colors
+foreground = #cccccc
+background = #1a1b2c
+background-opacity = 0.9
+theme = Monokai Pro Spectrum
+cursor-text = #1a1b2c
+
+# Keybinds
+keybind = ctrl+shift+enter=new_window

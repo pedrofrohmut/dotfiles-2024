@@ -7,7 +7,7 @@ import os
 from types import SimpleNamespace
 
 mod = "mod4"
-terminal = "alacritty"
+terminal = "ghostty"
 calculator = "galculator"
 HOMEDIR = os.path.expanduser("~/")
 
@@ -283,6 +283,9 @@ floating_layout = layout.Floating(
         Match(wm_class="galculator"),
         Match(wm_class="xfce4-appfinder"),
         Match(wm_class="Blueman-manager"),
+
+        # My stuff
+        Match(wm_class="mygame"),
     ],
     border_focus="#3a3b4c",
     border_normal="#1a1b2c",
