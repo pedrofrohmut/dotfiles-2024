@@ -7,7 +7,7 @@ import os
 from types import SimpleNamespace
 
 mod = "mod4"
-terminal = "ghostty"
+terminal = "alacritty"
 calculator = "galculator"
 HOMEDIR = os.path.expanduser("~/")
 
@@ -148,8 +148,8 @@ keys = [
     Key([mod, "control"], "x",  lazy.spawn(cmd.rofi_power)),
 
     # Programs
-    Key([mod], "r",          lazy.spawn(cmd.rofi_run)),
-    Key([mod, "shift"], "r", lazy.spawncmd()),
+    Key([mod, "shift"], "r",          lazy.spawn(cmd.rofi_run)),
+    Key([mod], "r", lazy.spawncmd()),
     Key([mod], "w",          lazy.spawn(cmd.firefox)),
     Key([mod], "e",          lazy.spawn("thunar")),
     Key([mod], "y",          lazy.spawn(cmd.rofi_apps)),

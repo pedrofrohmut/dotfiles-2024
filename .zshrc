@@ -15,6 +15,7 @@ alias src-rc='source ~/.zshrc'
 alias vim='nvim'
 alias ovim='/usr/bin/env vim'
 alias hx='helix'
+alias code='flatpak run com.vscodium.codium'
 
 alias gits='git status'
 alias gitp='git push'
@@ -107,7 +108,8 @@ run_or_flatpak() {
 helpy() {
     cmd_path=$(command -v "$1")
     if [ "$cmd_path" ]; then
-        "$1" --help | nvim -R # Pipe to Read Only neovim
+        #"$1" --help | nvim -R # Pipe to Read Only neovim
+        "$1" --help | bat
     else
         echo "ERROR: Command '$1' not found"
         return 1
@@ -116,27 +118,27 @@ helpy() {
 
 # --- ENV ----------------------------------------------------------------------
 
-# # Fcitx5
-# export GTK_IM_MODULE=fcitx5
-# export QT_IM_MODULE=fcitx5
-# export XMODIFIERS="@im=fcitx5"
-# export DefaultIMModule=fcitx5
-# export SDL_IM_MODULE=fcitx5
-#
-# export EDITOR=/usr/bin/nvim
-# export SHELL=/usr/bin/zsh
-# export GIT_EDITOR=/usr/bin/nvim
-#
+# Fcitx5
+export GTK_IM_MODULE=fcitx5
+export QT_IM_MODULE=fcitx5
+export XMODIFIERS="@im=fcitx5"
+export DefaultIMModule=fcitx5
+export SDL_IM_MODULE=fcitx5
+
+export SHELL=/usr/bin/zsh
+export EDITOR=/usr/bin/nvim
+export GIT_EDITOR=/usr/bin/nvim
+
 # # Java
 # export JAVA_HOME=/usr/lib/jvm/java-17-openjdk
-#
-# # My local bin (my symlinks)
-# export LOCAL_BIN=$HOME/.local/bin # For endeavourOS
 
 # Golang
 export GOPATH=$HOME/.go
 
-# export PATH=$PATH:$LOCAL_BIN
+# My local bin (my symlinks)
+export LOCAL_BIN=$HOME/.local/bin # For endeavourOS
+
+export PATH=$PATH:$LOCAL_BIN
 
 # --- Keybinds -----------------------------------------------------------------
 
