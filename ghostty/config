@@ -1,5 +1,7 @@
+# Startup options
 command = /usr/bin/zsh
-
+working-directory = home
+gtk-single-instance = false
 maximize = true
 
 # Window
@@ -17,11 +19,11 @@ font-family = FiraMono Nerd Font
 font-size = 10
 
 # Colors
+theme = Monokai Pro Spectrum
+background-opacity = 0.9
+cursor-text = #1a1b2c
 foreground = #cccccc
 background = #1a1b2c
-background-opacity = 0.9
-theme = Monokai Pro Spectrum
-cursor-text = #1a1b2c
 
 # Keybinds
 keybind = ctrl+shift+enter=new_window

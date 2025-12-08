@@ -14,8 +14,9 @@ alias src-rc='source ~/.zshrc'
 
 alias vim='nvim'
 alias ovim='/usr/bin/env vim'
-alias hx='helix'
-alias code='flatpak run com.vscodium.codium'
+#alias hx='helix'
+#alias code='flatpak run com.vscodium.codium'
+#alias code='flatpak run com.visualstudio.code'
 
 alias gits='git status'
 alias gitp='git push'
@@ -138,7 +139,13 @@ export GOPATH=$HOME/.go
 # My local bin (my symlinks)
 export LOCAL_BIN=$HOME/.local/bin # For endeavourOS
 
-export PATH=$PATH:$LOCAL_BIN
+export ASDF=$HOME/.asdf/shims
+
+#export DOTNET_ROOT=$HOME/.dotnet
+#export DOTNET_ROOT=$HOME/.asdf/shims
+export DOTNET_ROOT=$HOME/.asdf/installs/dotnet-core/8.0.120
+
+export PATH=$PATH:$LOCAL_BIN:$ASDF
 
 # --- Keybinds -----------------------------------------------------------------
 

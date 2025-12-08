@@ -163,6 +163,18 @@ keys = [
     # TODO: make a different function for this context
     # Key([mod, "control"], "0",     lazy.spawn(cmd.change_port)),
     Key([mod, "control"], "0",  lazy.function(my_change_port_keys)),
+
+    # Full screen screenshot
+    Key([], "Print",
+        lazy.spawn("bash -c 'scrot ~/media/images/screenshots/screenshot-%Y-%m-%d-%H-%M-%S.jpeg'")),
+
+    # Select area screenshot
+    Key(["shift"], "Print",
+        lazy.spawn("bash -c 'scrot -s ~/media/images/screenshots/area-screenshot-%Y-%m-%d-%H-%M-%S.jpeg'")),
+
+    # Active window screenshot
+    Key(["control"], "Print",
+        lazy.spawn("bash -c 'scrot -u ~/media/images/screenshots/window-screenshot-%Y-%m-%d-%H-%M-%S.jpeg'")),
 ]
 
 # Drag floating layouts.
