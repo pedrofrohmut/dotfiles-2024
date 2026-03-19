@@ -43,6 +43,9 @@ xrdb -merge ~/.Xresources &
 # Set xrandr
 xrandr --output HDMI-A-0 --mode 1920x1080 --rate 75 &
 
+# Firewall
+# firewall-applet &
+
 if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
     # Change color temperature (default: T 6500 t 4500)
     wlsunset -T 5700 -t 3500 -g 1.0 -S 06:00 -s 19:00 &

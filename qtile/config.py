@@ -295,6 +295,7 @@ floating_layout = layout.Floating(
         Match(wm_class="galculator"),
         Match(wm_class="xfce4-appfinder"),
         Match(wm_class="Blueman-manager"),
+        Match(wm_class="protonvpn-app"),
 
         # My stuff
         Match(wm_class="mygame"),
