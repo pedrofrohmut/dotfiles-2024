@@ -7,9 +7,9 @@ import os
 from types import SimpleNamespace
 
 mod = "mod4"
-terminal = "alacritty"
-calculator = "galculator"
 HOMEDIR = os.path.expanduser("~/")
+terminal = "st"
+calculator = "galculator"
 
 # My bash commands
 cmd = SimpleNamespace(
@@ -154,7 +154,8 @@ keys = [
     Key([mod], "e",          lazy.spawn("thunar")),
     Key([mod], "y",          lazy.spawn(cmd.rofi_apps)),
     Key([mod], "Return", lazy.spawn(terminal)),
-    Key([mod, "shift"], "y", lazy.spawn("xfce4-appfinder")),
+    # Key([mod, "shift"], "y", lazy.spawn("xfce4-appfinder")),
+    Key([mod, "shift"], "e", lazy.spawn("emacsclient --create-frame")),
 
     # Sound
     Key([mod], "equal", lazy.spawn(cmd.vol_up)),
@@ -162,7 +163,7 @@ keys = [
 
     # TODO: make a different function for this context
     # Key([mod, "control"], "0",     lazy.spawn(cmd.change_port)),
-    Key([mod, "control"], "0",  lazy.function(my_change_port_keys)),
+    # Key([mod, "control"], "0",  lazy.function(my_change_port_keys)),
 
     # Full screen screenshot
     Key([], "Print",
@@ -203,7 +204,7 @@ for i in groups:
 layouts = [
     layout.MonadTall(
         border_focus="#3a3b4c",
-        border_normal="#1a1b2c",
+        border_normal="#1a1b26",
         border_width=2,
         single_border_width=0,
         change_ratio=0.02,
@@ -219,18 +220,22 @@ layouts = [
 groups.append(ScratchPad("scratchpad", [
     DropDown("term", terminal, width=0.8, height=0.8, y=0.08, opacity=1),
     DropDown("calc", calculator, width=0.2, height=0.4, y=0.3, x=0.3, opacity=1),
+    DropDown("volctl", "pavucontrol", width=0.5, height=0.5, y=0.19, x=0.19, opacity=1),
+    DropDown("bluetooth", "blueman-manager", width=0.4, height=0.5, y=0.23, x=0.26, opacity=1),
 ]))
 
 keys.extend([
     Key([mod], "t", lazy.group["scratchpad"].dropdown_toggle("term")),
     Key([mod], "c", lazy.group["scratchpad"].dropdown_toggle("calc")),
+    Key([mod], "f11", lazy.group["scratchpad"].dropdown_toggle("volctl")),
+    Key([mod], "f12", lazy.group["scratchpad"].dropdown_toggle("bluetooth")),
 ])
 
 #############################################################################################
 # Bar and Widgets ###########################################################################
 #############################################################################################
 
-widget_defaults = dict(font="FiraMono Nerd Font", fontsize=11, padding=3, background="1a1b2ccc")
+widget_defaults = dict(font="FiraMono Nerd Font", fontsize=11, padding=3)
 extension_defaults = widget_defaults.copy()
 
 screens = [
@@ -256,7 +261,22 @@ screens = [
                 # widget.Sep(padding=20),
                 # vol_txt, # My custom widget to change default sink
                 # widget.Sep(padding=20),
-                widget.Volume(fmt='Vol: {}', step=5, update_interval=0.4),
+                widget.Volume( # fmt="Vol: {}", step=5, update_interval=0.4,
+                    fmt="Vol: {}",
+                    update_interval=0.2,
+                    # Volume
+                    get_volume_command="pamixer --get-volume | awk '{print $0\"%\"}'",
+                    volume_up_command="pamixer --increase 5",
+                    volume_down_command="pamixer --decrease 5",
+                    # Mute
+                    check_mute_command="pamixer --get-mute",
+                    check_mute_string="true",
+                    # Mouse Listeneres
+                    mouse_callbacks={
+                        "Button1": lazy.spawn("pamixer --toggle-mute"),
+                        "Button3": lazy.spawn('bash -c "pavucontrol"'), # TODO: Make it a toggle
+                    }
+                ),
                 widget.Sep(padding=20),
                 # widget.CPU(format="CPU: {load_percent}%", update_interval=3.0),
                 # widget.Sep(padding=20),
@@ -268,6 +288,8 @@ screens = [
                 widget.Systray(icon_size=14, padding=8, update_interval=1.0), ### Doesnt work on wayland
             ],
             24,
+            background="#1a1b26",
+            opacity=1,
         ),
     ),
 ]
@@ -301,7 +323,7 @@ floating_layout = layout.Floating(
         Match(wm_class="mygame"),
     ],
     border_focus="#3a3b4c",
-    border_normal="#1a1b2c",
+    border_normal="#1a1b26",
     border_width=2,
 )
 auto_fullscreen = True
