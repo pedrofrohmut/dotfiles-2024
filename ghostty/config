@@ -21,9 +21,9 @@ font-size = 10
 # Colors
 theme = Monokai Pro Spectrum
 background-opacity = 0.9
-cursor-text = #1a1b2c
+cursor-text = #1a1b26
 foreground = #cccccc
-background = #1a1b2c
+background = #1a1b26
 
 # Keybinds
 keybind = ctrl+shift+enter=new_window
