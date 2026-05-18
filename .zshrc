@@ -115,6 +115,9 @@ helpy() {
     fi
 }
 
+alias debug-chromium='/usr/bin/chromium --remote-debugging-port=9222
+--no-first-run --no-default-browser-check --user-data-dir=/tmp/chrome-debug-profile'
+
 # --- ENV ----------------------------------------------------------------------
 
 # Fcitx5
