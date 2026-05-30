@@ -171,11 +171,11 @@ keys = [
 
     # Select area screenshot
     Key(["shift"], "Print",
-        lazy.spawn("bash -c 'scrot -s ~/media/images/screenshots/area-screenshot-%Y-%m-%d-%H-%M-%S.jpeg'")),
+        lazy.spawn("bash -c 'scrot --select ~/media/images/screenshots/area-screenshot-%Y-%m-%d-%H-%M-%S.jpeg'")),
 
     # Active window screenshot
     Key(["control"], "Print",
-        lazy.spawn("bash -c 'scrot -u ~/media/images/screenshots/window-screenshot-%Y-%m-%d-%H-%M-%S.jpeg'")),
+        lazy.spawn("bash -c 'scrot --focused ~/media/images/screenshots/window-screenshot-%Y-%m-%d-%H-%M-%S.jpeg'")),
 ]
 
 # Drag floating layouts.
@@ -321,6 +321,8 @@ floating_layout = layout.Floating(
 
         # My stuff
         Match(wm_class="mygame"),
+        Match(wm_class="opengl_app"),
+        Match(wm_class="Handmade Hero"),
     ],
     border_focus="#3a3b4c",
     border_normal="#1a1b26",
