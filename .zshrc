@@ -43,6 +43,8 @@ alias ls='ls --color=auto'
 alias ll='ls -lAFh'
 alias la='ls -1 -AFh'
 
+alias grep='grep --color=always'
+
 alias tree='tree -C'
 alias gtree='tree --gitignore'
 
@@ -117,6 +119,8 @@ helpy() {
 
 alias debug-chromium='/usr/bin/chromium --remote-debugging-port=9222 \
 --no-first-run --no-default-browser-check --user-data-dir=/tmp/chrome-debug-profile'
+
+alias check-ports='ss -tulnp'
 
 # --- ENV ----------------------------------------------------------------------
 
