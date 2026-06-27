@@ -75,6 +75,15 @@ def my_resize_window(qtile, direction):
             case "right":
                 qtile.current_layout.grow_main()
 
+@lazy.function
+def my_toggle_minimize(qtile):
+    if qtile.current_window.minimized:
+        qtile.current_window.minimized = False
+    else:
+        win = qtile.current_window
+        qtile.current_layout.previous()
+        win.minimized = True
+
 # Function to get the output of a shell command
 def get_command_output(cmd):
     result = subprocess.run(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -111,7 +120,8 @@ keys = [
     Key([mod], "l", lazy.layout.right()),
     Key([mod], "j", lazy.group.next_window()),
     Key([mod], "k", lazy.group.prev_window()),
-    Key([mod, "shift"], "n", lazy.layout.next()),
+    Key([mod], "p", lazy.layout.previous()),
+    Key([mod], "n", lazy.layout.next()),
 
     # Move window
     Key([mod, "shift"], "h", my_move_window("left")),
@@ -127,13 +137,14 @@ keys = [
     Key([mod], "m", lazy.layout.reset()),
 
     # Switch between groups
-    Key([mod], "p",      lazy.screen.prev_group()),
-    Key([mod], "n",      lazy.screen.next_group()),
-    Key([mod], "Tab",    lazy.screen.toggle_group()),
-    Key(["mod1"], "Tab", lazy.screen.toggle_group()),
+    Key([mod], "bracketleft", lazy.screen.prev_group()),
+    Key([mod], "bracketright", lazy.screen.next_group()),
+    Key([mod], "Tab", lazy.screen.toggle_group()),
+    # Key(["mod1"], "Tab", lazy.screen.toggle_group()),
 
     # Layout control
-    Key([mod], "u", lazy.window.toggle_minimize()),
+    # Key([mod], "u", lazy.window.toggle_minimize()),
+    Key([mod], "u", my_toggle_minimize()),
     Key([mod], "i", lazy.window.toggle_floating()),
     Key([mod], "o", lazy.window.bring_to_front()),
     Key([mod], "f", lazy.window.toggle_fullscreen()),
@@ -155,15 +166,15 @@ keys = [
     Key([mod], "y",          lazy.spawn(cmd.rofi_apps)),
     Key([mod], "Return", lazy.spawn(terminal)),
     # Key([mod, "shift"], "y", lazy.spawn("xfce4-appfinder")),
-    Key([mod, "shift"], "e", lazy.spawn("emacsclient --create-frame")),
+    # Key([mod, "shift"], "e", lazy.spawn("emacsclient --create-frame")),
 
     # Sound
     Key([mod], "equal", lazy.spawn(cmd.vol_up)),
     Key([mod], "minus", lazy.spawn(cmd.vol_down)),
 
     # TODO: make a different function for this context
-    # Key([mod, "control"], "0",     lazy.spawn(cmd.change_port)),
-    # Key([mod, "control"], "0",  lazy.function(my_change_port_keys)),
+    # Key([mod, "control"], "0", lazy.spawn(cmd.change_port)),
+    # Key([mod, "control"], "0", lazy.function(my_change_port_keys)),
 
     # Full screen screenshot
     Key([], "Print",
