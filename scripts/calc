@@ -1,0 +1,55 @@
+#! /usr/bin/bash
+
+show_usage() {
+    echo "Usage: calc [\"<operation>\"|FLAGS].
+The flags are:
+-h, --help Display this help message
+-v, --version Display information about the version and the author"
+}
+
+show_version() {
+    echo "Calc is version 1.0; Pedro Frohmut 2026 Copyrights"
+}
+
+help_flag=false
+version_flag=false
+operation=""
+
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        -v|--version)
+            version_flag=true
+            shift
+            ;;
+        -h|--help)
+            help_flag=true
+            shift
+            ;;
+        -*|--*)
+            echo "[ERROR] Unknow option: $1"
+            show_usage
+            exit 1
+            ;;
+        *)
+            operation="$1"
+            shift
+            ;;
+    esac
+done
+
+if $help_flag; then
+    show_usage
+    exit 0
+fi
+
+if $version_flag; then
+    show_version
+    exit 0
+fi
+
+if [[ -z "$operation" ]]; then
+    echo "[ERROR] Operation is required"
+    exit 1
+fi
+
+echo "Calc: $operation = $(($operation))"

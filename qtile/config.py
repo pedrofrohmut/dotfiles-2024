@@ -166,7 +166,7 @@ keys = [
     Key([mod], "y",          lazy.spawn(cmd.rofi_apps)),
     Key([mod], "Return", lazy.spawn(terminal)),
     # Key([mod, "shift"], "y", lazy.spawn("xfce4-appfinder")),
-    # Key([mod, "shift"], "e", lazy.spawn("emacsclient --create-frame")),
+    Key([mod, "shift"], "e", lazy.spawn("emacsclient --create-frame")),
 
     # Sound
     Key([mod], "equal", lazy.spawn(cmd.vol_up)),
