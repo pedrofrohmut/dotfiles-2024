@@ -7,14 +7,14 @@
 
 window#waybar {
     background: #242424;
-    color: #afa;
+    color: #ccc;
 }
 
 /* Workspaces */
 
 #workspaces button {
     background: transparent;
-    color: #afa;
+    color: #ccc;
     border: 0;
     border-bottom: 2px solid #242424;
     border-radius: 0;
@@ -25,9 +25,9 @@ window#waybar {
 
 #workspaces button.focused {
     font-weight: bold;
-    background: #afa;
-    color: #242424;
-    border-bottom: 2px solid #afa;
+    background: #585858;
+    color: #ccc;
+    border-bottom: 2px solid #585858;
 }
 
 #workspaces button.urgent {
@@ -36,15 +36,29 @@ window#waybar {
 
 /* modules */
 
-#mode,
-#scratchpad,
-#custom-media,
-#window,
 #pulseaudio,
 #cpu,
 #memory,
 #clock,
 #tray {
+    padding: 0;
+    margin: 3px 0;
+
+    padding-top: 4px;
+    padding-right: 12px;
+    margin-right: 12px;
+    border-right: 1px solid #585858;
+}
+
+#clock.time {
+    padding-top: 0;
+    font-size: 14px;
+    color: #0ff;
+}
+
+/* Tray */
+
+#tray {
     padding: 2px;
-    margin: 0 10px;
+    border-right: 0;
 }

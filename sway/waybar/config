@@ -12,7 +12,8 @@
     "pulseaudio",
     "cpu",
     "memory",
-    "clock",
+    "clock#date",
+    "clock#time",
     "tray"
   ],
   "pulseaudio": {
@@ -28,11 +29,16 @@
     "format": "ram: {}%",
     "tooltip": false
   },
-  "clock": {
-    "format": "{:%d-%m-%Y | %H:%M}"
+  "clock#date": {
+    "format": "{:%a %d-%m-%Y}",
+    "tooltip": false
+  },
+  "clock#time": {
+    "format": "{:%H:%M}",
+    "tooltip": false
   },
   "tray": {
-    "icon-size": 21,
-    "spacing": 10
+    "icon-size": 18,
+    "spacing": 6
   }
 }
