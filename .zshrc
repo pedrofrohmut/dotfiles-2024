@@ -86,7 +86,7 @@ alias update-arch='sudo pacman -Syu && echo "System updated successfully!"'
 alias update-system='update-mirrors && update-arch'
 
 # Setup Ocaml env
-# alias opam-env='eval $(opam env)'
+alias opam-env='eval $(opam env)'
 
 # Setup Dotnet8 env based on file
 # alias dotnet8-env="source $HOME/opt/dotnet-8.0.201/dotnet8.env"
@@ -146,6 +146,8 @@ export LOCAL_BIN=$HOME/.local/bin # For endeavourOS
 
 export ASDF=$HOME/.asdf/shims
 
+export DOTNET_CLI_TELEMETRY_OPTOUT=true
+
 #export DOTNET_ROOT=$HOME/.dotnet
 #export DOTNET_ROOT=$HOME/.asdf/shims
 export DOTNET_ROOT=$HOME/.asdf/installs/dotnet-core/8.0.120
@@ -198,6 +200,8 @@ zstyle ':completion:*' rehash true
 setopt nobeep
 
 # --- Evals --------------------------------------------------------------------
+
+eval "$(opam env)"
 
 # Starship Prompt
 eval "$(starship init zsh)"
