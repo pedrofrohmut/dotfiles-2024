@@ -1,0 +1,38 @@
+{
+  "modules-left": [
+    "sway/workspaces",
+    "sway/mode",
+    "sway/scratchpad",
+    "custom/media"
+  ],
+  "modules-center": [
+    "sway/window"
+  ],
+  "modules-right": [
+    "pulseaudio",
+    "cpu",
+    "memory",
+    "clock",
+    "tray"
+  ],
+  "pulseaudio": {
+    "scroll-step": 5,
+    "format": "vol: {volume}%",
+    "on-click": "pavucontrol"
+  },
+  "cpu": {
+    "format": "cpu: {usage}%",
+    "tooltip": false
+  },
+  "memory": {
+    "format": "ram: {}%",
+    "tooltip": false
+  },
+  "clock": {
+    "format": "{:%d-%m-%Y | %H:%M}"
+  },
+  "tray": {
+    "icon-size": 21,
+    "spacing": 10
+  }
+}

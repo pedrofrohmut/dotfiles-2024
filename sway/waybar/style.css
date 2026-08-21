@@ -1,0 +1,50 @@
+* {
+    font-size: 12px;
+    font-family: "FiraCode Nerd Font", monospace;
+    margin: 0;
+    padding: 0;
+}
+
+window#waybar {
+    background: #242424;
+    color: #afa;
+}
+
+/* Workspaces */
+
+#workspaces button {
+    background: transparent;
+    color: #afa;
+    border: 0;
+    border-bottom: 2px solid #242424;
+    border-radius: 0;
+    margin: 0 5px;
+    padding: 2px 3px 0;
+    transition: none;
+}
+
+#workspaces button.focused {
+    font-weight: bold;
+    background: #afa;
+    color: #242424;
+    border-bottom: 2px solid #afa;
+}
+
+#workspaces button.urgent {
+    border-bottom: 2px solid #f66;
+}
+
+/* modules */
+
+#mode,
+#scratchpad,
+#custom-media,
+#window,
+#pulseaudio,
+#cpu,
+#memory,
+#clock,
+#tray {
+    padding: 2px;
+    margin: 0 10px;
+}
