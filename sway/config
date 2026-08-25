@@ -15,7 +15,7 @@ set $right l
 font pango: Fira Code Regular 11
 
 # Your preferred terminal emulator
-set $term st
+set $term st -e /usr/bin/env zsh
 
 # Your preferred application launcher
 set $menu wmenu-run
@@ -68,8 +68,8 @@ output HDMI-A-1 mode 1920x1080@74.973Hz
 
 # or input <identifier>
 input "type:keyboard" {
-    repeat_delay 250
-    repeat_rate 30
+    # repeat_delay 250
+    # repeat_rate 30
     # xkb_options caps:escape
     xkb_layout us
 }
@@ -83,6 +83,7 @@ seat seat0 xcursor_theme Mocu-White-Right 32
 # to get the window app_id: $ swaymsg -t get_tree | grep "app_id"
 for_window [app_id="galculator"] floating enable
 for_window [app_id="gpick"] floating enable
+for_window [app_id="org.pulseaudio.pavucontrol"] floating enable
 
 ### Key bindings
 #
@@ -212,17 +213,17 @@ mode "resize" {
     bindsym $up resize shrink height 10px
     bindsym $right resize grow width 10px
 
-    # Ditto, with arrow keys
-    bindsym Left resize shrink width 10px
-    bindsym Down resize grow height 10px
-    bindsym Up resize shrink height 10px
-    bindsym Right resize grow width 10px
-
     # Return to default mode
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
 bindsym $mod+r mode "resize"
+
+# Resizing with Ctrl + super
+bindsym $mod+Ctrl+$left resize shrink width 10px
+bindsym $mod+Ctrl+$down resize grow height 10px
+bindsym $mod+Ctrl+$up resize shrink height 10px
+bindsym $mod+Ctrl+$right resize grow width 10px
 
 bar swaybar_command waybar
 
@@ -246,6 +247,9 @@ client.background               #000000
 # client.urgent           #2f343a #900000 #ffffff #900000   #900000
 # client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 # client.background               #000000
+
+# Title
+hide_edge_borders --i3 both
 
 # Borders
 default_border pixel 2

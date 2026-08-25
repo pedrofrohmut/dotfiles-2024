@@ -1,12 +1,15 @@
 {
   "modules-left": [
-    "sway/workspaces",
-    "sway/mode",
-    "sway/scratchpad",
-    "custom/media"
+    // "hyprland/workspaces",
+    "sway/workspaces"
+    // "sway/mode",
+    // "sway/scratchpad",
+    // "custom/media"
   ],
   "modules-center": [
-    "sway/window"
+    // "hyprland/windowcount",
+    // "hyprland/window",
+    "sway/window",
   ],
   "modules-right": [
     "pulseaudio",
@@ -19,7 +22,9 @@
   "pulseaudio": {
     "scroll-step": 5,
     "format": "vol: {volume}%",
-    "on-click": "pavucontrol"
+    "format-muted": "vol: MUTED",
+    "on-click": "pamixer --toggle-mute",
+    "on-click-right": "pavucontrol"
   },
   "cpu": {
     "format": "cpu: {usage}%",

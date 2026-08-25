@@ -17,5 +17,9 @@ export PATH=$PATH:$LOCAL_BIN
 
 alias ls='ls --color=auto'
 alias ll='ls -lAFh'
+alias vim='nvim'
 
 alias grep='grep --color=always'
+
+# Starship Prompt
+eval "$(starship init bash)"

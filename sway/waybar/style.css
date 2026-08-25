@@ -23,7 +23,8 @@ window#waybar {
     transition: none;
 }
 
-#workspaces button.focused {
+#workspaces button.active, /* Hyprland */
+#workspaces button.focused { /* Sway */
     font-weight: bold;
     background: #585858;
     color: #ccc;
