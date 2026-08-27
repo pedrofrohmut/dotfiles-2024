@@ -320,7 +320,7 @@ bindsym $mod+Ctrl+x exec ~/dotfiles/scripts/rofi-power.sh
 #
 
 # Setup the background
-exec_always swaybg -i $HOME/media/wallpaper/1332407.png -m stretch
+# exec_always swaybg -i $HOME/media/wallpaper/1332407.png -m stretch
 
 exec $HOME/dotfiles/sway/sway-autostart.sh
 
