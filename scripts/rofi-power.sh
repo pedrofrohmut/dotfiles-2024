@@ -48,8 +48,12 @@ case $option in
         fi
         ;;
     $SUSPEND )
-        # i3lock -i ~/media/wallpaper/lock.png && systemctl suspend
-        slock & systemctl suspend
+        if [[ "$XDG_SESSION_TYPE" = "wayland" ]]; then
+            swaylock -f -i ~/media/wallpaper/lock.png & systemctl suspend
+        else
+            # i3lock -i ~/media/wallpaper/lock.png && systemctl suspend
+            slock & systemctl suspend
+        fi
         ;;
     * )
         exit
