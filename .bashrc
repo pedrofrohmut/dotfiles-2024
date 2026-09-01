@@ -11,7 +11,7 @@ export GIT_EDITOR=/usr/bin/nvim
 export GOPATH=$HOME/.go
 
 # My local bin (my symlinks)
-export LOCAL_BIN=$HOME/.local/bin # For endeavourOS
+export LOCAL_BIN=$HOME/.local/bin
 
 export PATH=$PATH:$LOCAL_BIN
 

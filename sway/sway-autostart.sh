@@ -18,7 +18,7 @@ blueman-applet &
 # --- Background Apps ----------------------------------------------------------
 
 # PolicyKit Authentication Agent (PolicyKit Authentication Agent)
-/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+#/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
 # Notification Daemon
 mako &

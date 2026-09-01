@@ -56,7 +56,7 @@ alias rm='rm --verbose'
 alias jj='jobs'
 
 # Depends on X11 and XClip
-alias c-path='pwd | xclip -selection clipboard'
+alias cp-path='pwd | xclip -selection clipboard'
 
 alias du-here='du -h -d 1 | sort -hr | head --lines 20'
 alias dh='du-here'
@@ -201,7 +201,7 @@ setopt nobeep
 
 # --- Evals --------------------------------------------------------------------
 
-eval "$(opam env)"
+# eval "$(opam env)"
 
 # Starship Prompt
 eval "$(starship init zsh)"
