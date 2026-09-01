@@ -24,7 +24,8 @@
     "format": "vol: {volume}%",
     "format-muted": "vol: MUTED",
     "on-click": "pamixer --toggle-mute",
-    "on-click-right": "pavucontrol"
+    "on-click-right": "pavucontrol",
+    "tooltip": false
   },
   "cpu": {
     "format": "cpu: {usage}%",
@@ -44,6 +45,7 @@
   },
   "tray": {
     "icon-size": 18,
-    "spacing": 6
+    "spacing": 6,
+    "tooltip": false
   }
 }

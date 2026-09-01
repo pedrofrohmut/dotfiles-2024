@@ -2,6 +2,8 @@
 # Copy this to ~/.config/sway/config and edit it to your liking.
 # Read `man 5 sway` for a complete reference.
 
+## FOO
+
 ### Variables
 
 set $mod Mod4
@@ -166,8 +168,8 @@ for_window [app_id="org.pulseaudio.pavucontrol"] floating enable
     # You can "split" the current object of your focus with
     # $mod+b or $mod+v, for horizontal and vertical splits
     # respectively.
-    bindsym $mod+s splith
-    bindsym $mod+v splitv
+    bindsym $mod+v splith
+    bindsym $mod+s splitv
 
     # Switch the current container between different layout styles
     # bindsym $mod+s layout stacking
@@ -180,11 +182,11 @@ for_window [app_id="org.pulseaudio.pavucontrol"] floating enable
 
     # Toggle the current focus between tiling and floating mode
     # bindsym $mod+Shift+space floating toggle
-    # bindsym $mod+i floating toggle
+    bindsym $mod+i floating toggle
 
     # Swap focus between the tiling area and the floating area
     # bindsym $mod+space focus mode_toggle
-    # bindsym $mod+u focus mode_toggle
+    bindsym $mod+u focus mode_toggle
 
     # Move focus to the parent container
     # bindsym $mod+a focus parent
@@ -321,6 +323,8 @@ bindsym $mod+Ctrl+x exec ~/dotfiles/scripts/rofi-power.sh
 
 # Setup the background
 # exec_always swaybg -i $HOME/media/wallpaper/1332407.png -m stretch
+
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
 
 exec $HOME/dotfiles/sway/sway-autostart.sh
 
