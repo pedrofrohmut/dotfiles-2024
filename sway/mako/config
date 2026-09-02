@@ -3,3 +3,5 @@ font=monospace 11
 background-color=#242424
 padding=10
 border-size=0
+width=500
+height=200

@@ -10,7 +10,7 @@ window#waybar {
     color: #ccc;
 }
 
-/* Workspaces */
+/* Left - Workspaces */
 
 #workspaces button {
     background: transparent;
@@ -35,7 +35,13 @@ window#waybar {
     border-bottom: 2px solid #f66;
 }
 
-/* modules */
+/* Middle - Windows */
+
+#window {
+    color: #777;
+}
+
+/* Right - Modules */
 
 #pulseaudio,
 #cpu,

@@ -6,11 +6,11 @@
     // "sway/scratchpad",
     // "custom/media"
   ],
-  "modules-center": [
+  // "modules-center": [
     // "hyprland/windowcount",
     // "hyprland/window",
-    "sway/window",
-  ],
+  //   "sway/window"
+  // ],
   "modules-right": [
     "pulseaudio",
     "cpu",
@@ -19,6 +19,10 @@
     "clock#time",
     "tray"
   ],
+  // "sway/window": {
+  //   "format": "{app_id}",
+  //   "max-length": 50
+  // },
   "pulseaudio": {
     "scroll-step": 5,
     "format": "vol: {volume}%",
