@@ -201,7 +201,7 @@ setopt nobeep
 
 # --- Evals --------------------------------------------------------------------
 
-# eval "$(opam env)"
+eval "$(opam env)"
 
 # Starship Prompt
 eval "$(starship init zsh)"

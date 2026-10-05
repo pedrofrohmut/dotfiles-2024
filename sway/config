@@ -42,6 +42,7 @@ for_window [app_id="galculator"] floating enable
 for_window [app_id="gpick"] floating enable
 for_window [app_id="org.pulseaudio.pavucontrol"] floating enable
 for_window [app_id="blueman-manager"] floating enable
+for_window [app_id="xdg-desktop-portal-gtk"] floating enable
 
 ### Key bindings ###############################################################
 
